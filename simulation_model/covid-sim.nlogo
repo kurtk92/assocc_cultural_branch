@@ -2430,11 +2430,7 @@ individualism-vs-collectivism
 individualism-vs-collectivism
 0
 100
-<<<<<<< HEAD
 73.319162656274
-=======
-0.5
->>>>>>> 562f95bdb832c66dbfbdf783bb02792f9a855c1b
 1
 1
 NIL
@@ -4062,7 +4058,7 @@ CHOOSER
 hofstede-schwartz-mapping-mode
 hofstede-schwartz-mapping-mode
 "theoretical" "empirical" "empirical & theoretical" "old settings"
-0
+2
 
 SWITCH
 3582
@@ -8674,10 +8670,6 @@ NetLogo 6.1.1
     </enumeratedValueSet>
     <enumeratedValueSet variable="power-distance">
       <value value="50"/>
-<<<<<<< HEAD
-=======
-      <value value="97.5"/>
->>>>>>> 562f95bdb832c66dbfbdf783bb02792f9a855c1b
     </enumeratedValueSet>
     <enumeratedValueSet variable="individualism-vs-collectivism">
       <value value="50"/>
@@ -8912,12 +8904,7 @@ NetLogo 6.1.1
       <value value="2.5"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="individualism-vs-collectivism">
-<<<<<<< HEAD
       <value value="2.5"/>
-=======
-      <value value="50"/>
-      <value value="97.5"/>
->>>>>>> 562f95bdb832c66dbfbdf783bb02792f9a855c1b
     </enumeratedValueSet>
     <enumeratedValueSet variable="masculinity-vs-femininity">
       <value value="2.5"/>
@@ -9152,10 +9139,6 @@ NetLogo 6.1.1
       <value value="97.5"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="masculinity-vs-femininity">
-<<<<<<< HEAD
-=======
-      <value value="50"/>
->>>>>>> 562f95bdb832c66dbfbdf783bb02792f9a855c1b
       <value value="97.5"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="uncertainty-avoidance">
@@ -9384,32 +9367,7 @@ NetLogo 6.1.1
     <enumeratedValueSet variable="social-distancing-density-factor">
       <value value="1"/>
     </enumeratedValueSet>
-<<<<<<< HEAD
     <steppedValueSet variable="lhs_experiment_number" first="0" step="1" last="1799"/>
-=======
-    <enumeratedValueSet variable="power-distance">
-      <value value="0.025"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="individualism-vs-collectivism">
-      <value value="0.025"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="masculinity-vs-femininity">
-      <value value="0.025"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="uncertainty-avoidance">
-      <value value="50"/>
-      <value value="97.5"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="long-vs-short-termism">
-      <value value="0.025"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="indulgence-vs-restraint">
-      <value value="0.025"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="cultural-tightness">
-      <value value="0.025"/>
-    </enumeratedValueSet>
->>>>>>> 562f95bdb832c66dbfbdf783bb02792f9a855c1b
   </experiment>
   <experiment name="S7-Q1-SVD-0-99" repetitions="1" runMetricsEveryStep="true">
     <setup>setup</setup>
