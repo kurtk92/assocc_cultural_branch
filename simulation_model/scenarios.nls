@@ -1,0 +1,454 @@
+to load-scenario-specific-parameter-settings
+  if preset-scenario = "none" [stop]
+  
+  ;the general process lies in adapting your scenario from the baseline
+  set #households 400
+  if model-branch = "cultural branch" [
+    set gp-scaling-mode "cultural branch"
+    set density-factor-computation "mapping: proportional"
+    set migration? false
+    set OVERRIDE-ECONOMY? true
+  ]
+  load-baseline-parameter-settings
+  ;optionally overwrite baseline parameter settings with scenario specific adjustments to model parameter settings
+  load-scenario-7-cultural-model
+end
+
+to load-scenario-7-cultural-model  
+  ;overwrite some of the baseline settings according to what we judge as proper for executing the cultural model scenarios
+  
+  if model-branch = "cultural branch" [
+    ;General settings
+    set gp-scaling-mode "cultural branch"
+    set density-factor-computation "mapping: proportional"
+    set migration? false
+    set OVERRIDE-ECONOMY? true
+    set Aware-of-working-at-home-at-start-of-simulation? false
+    set Aware-of-social-distancing-at-start-of-simulation? false
+    set Aware-of-corona-virus-at-start-of-simulation? false
+    ;disable the filtering effect that the ratio-self-quarantining globals have on the quarantining behavior of agents
+    ;do this by setting them to 1
+    set ratio-self-quarantining-when-symptomatic 1
+    set ratio-self-quarantining-when-a-family-member-is-symptomatic 1
+    
+    if cultural-model-experimentation = "no-policy-measures" [
+      set global-confinement-measures "none"
+      stop 
+    ]
+    
+    if cultural-model-experimentation = "only-social-distancing" [
+      set global-confinement-metric "RNaught"
+      set global-confinement-measures "social-distancing"
+    ]
+    
+    if cultural-model-experimentation = "social-distancing-soft-lockdown" [
+      set global-confinement-metric "RNaught"
+      set global-confinement-measures "soft-lockdown-5-2"
+    ]
+    
+    if cultural-model-experimentation = "social-distancing-hard-lockdown" [
+      set global-confinement-metric "RNaught"
+      set global-confinement-measures "lockdown-10-5"
+    ]
+    
+    if cultural-model-experimentation = "social-distancing-tracking-tracing-testing-isolating" [
+      set global-confinement-metric "RNaught"
+      set global-confinement-measures "social-distancing-testing-tracking-and-tracing"
+      ;TRACKING & TRACING APP VARIABLES
+      set when-is-tracing-app-active? "RNaught-based"
+      set ratio-of-people-using-the-tracking-app 0.5
+      ;COVID TESTING VARIABLES
+      set when-is-daily-testing-applied? "RNaught-based"
+      set only-test-retirees-with-extra-tests? true
+      set test-home-of-confirmed-people? true
+      set test-workplace-of-confirmed-people? true
+      set prioritize-testing-health-care? true
+      set prioritize-testing-education? true
+      set ratio-population-daily-immunity-testing 0.25
+      set ratio-population-randomly-tested-daily 0.5
+    ]
+  ]
+  
+  if model-branch = "ASSOCC master branch" [
+    ;General settings
+    set static-seed? true
+    set sync-cultural-and-demographic-settings? true
+    set #households 400
+    load-number-of-gathering-points-based-on-number-of-households #households
+    set migration? false
+    set OVERRIDE-ECONOMY? true
+    set Aware-of-working-at-home-at-start-of-simulation? false
+    set Aware-of-social-distancing-at-start-of-simulation? false
+    
+    ;new settings (cultural branch)
+    set gp-scaling-mode "default ASSOCC"
+    set density-factor-computation "default"
+    set global-confinement-metric "infection-ratio"
+    
+    if cultural-model-experimentation = "no-policy-measures" [
+      stop 
+    ]
+    
+    if cultural-model-experimentation = "only-social-distancing" [
+      set ratio-omniscious-infected-that-trigger-social-distancing-measure 0.02 
+    ]
+    
+    if cultural-model-experimentation = "social-distancing-soft-lockdown" [
+      set ratio-omniscious-infected-that-trigger-social-distancing-measure 0.02
+      set global-confinement-measures "soft-lockdown-5-2"
+      set is-working-from-home-recommended? true
+    ]
+    
+    if cultural-model-experimentation = "social-distancing-hard-lockdown" [
+      set ratio-omniscious-infected-that-trigger-social-distancing-measure 0.02
+      set global-confinement-measures "lockdown-10-5"
+      set ratio-omniscious-infected-that-trigger-school-closing-measure 0.05
+      set ratio-omniscious-infected-that-trigger-non-essential-closing-measure 0.05
+      set is-working-from-home-recommended? true
+    ]
+    
+    if cultural-model-experimentation = "social-distancing-tracking-tracing-testing-isolating" [
+      set ratio-omniscious-infected-that-trigger-social-distancing-measure 0.02
+      set when-is-tracing-app-active? "always"
+      ;set is-tracking-app-testing-immediately-recursive? true
+      set ratio-of-people-using-the-tracking-app 0.5
+      set when-is-daily-testing-applied? "always"
+      set only-test-retirees-with-extra-tests? true
+      set test-home-of-confirmed-people? true
+      set test-workplace-of-confirmed-people? true
+      set prioritize-testing-health-care? true
+      set prioritize-testing-education? true
+      set ratio-population-daily-immunity-testing 0.25
+      set ratio-population-randomly-tested-daily 0.5
+      set is-infected-and-their-families-requested-to-stay-at-home? true
+      set all-self-isolate-for-35-days-when-first-hitting-2%-infected? true
+      set is-working-from-home-recommended? true
+      ;    set keep-retired-quarantined-forever-if-global-quarantine-is-fired-global-measure? true
+      set ratio-self-quarantining-when-symptomatic 0.75
+      set ratio-self-quarantining-when-a-family-member-is-symptomatic 0.75
+    ]
+  ]
+  
+end
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;; DEFINE DEFAULT ASSOCC MODEL PARAMETER SETTINGS ;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;; KEEP THESE UP TO DATE! ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to load-baseline-parameter-settings
+  ;set general simulation settings to their default states
+;  set static-seed? true
+;  set sensitivity-analysis? false
+  set #random-seed 999
+  set #households 400
+  set log? false
+  set log-contamination? false
+  set log-preferred-activity-decision? false
+  set log-violating-quarantine? false
+  set clear-log-on-setup? true
+  set log-setup? false
+  
+  ;load default settings for each submodel
+  load-default-household-profiles
+  load-number-of-gathering-points-based-on-number-of-households #households
+  load-default-disease-model
+  load-default-migration-model
+  load-default-contagion-model
+  load-default-transport-model
+  load-default-economic-parameters
+  load-default-culture-values-and-needs-parameter-settings
+  load-default-social-network-model
+  load-default-intervention-measures-settings
+  
+end
+
+to load-default-intervention-measures-settings
+  set percentage-news-watchers 1
+  set food-delivered-to-isolators? true
+  set ratio-of-anxiety-avoidance-tracing-app-users 1
+  set ratio-young-with-phones 1
+  set ratio-retired-with-phones 1
+  set is-tracking-app-testing-immediately-recursive? true
+  set infection-rate-based-trigger 0.02
+  ;by default: disable all measures aimed at minimizing the spread & mortality of the coronavirus
+  disable-all-measures
+end
+
+to load-number-of-gathering-points-based-on-number-of-households [#hld]
+  if gp-scaling-mode = "cultural branch" [
+    show #hld
+    show ratio-hospital-beds-per-household
+    set #beds-in-hospital max (list floor (#hld * ratio-hospital-beds-per-household) 1)
+  ]
+  
+  if gp-scaling-mode = "default ASSOCC" [
+    set #beds-in-hospital floor (#hld / 30)
+  ]
+  
+  load-scaled-gathering-point-distribution #hld
+end
+
+to load-scaled-gathering-point-distribution [#hld]
+  if gp-scaling-mode = "cultural branch" [
+    ;1 hospital is presumed to have a maximum of 100 beds
+    set #hospital-gp max (list ceiling (#beds-in-hospital / 100) 1)
+    ; 1 school is one classroom with max 25 children/teachers
+    set #schools-gp max (list ceiling ((#youth-to-create + (#workers-to-create * probability-school-personel) ) / 25) 1)
+    ; 1 university is one lecture hall with 100 students/lecturers 
+    set #universities-gp max (list ceiling ((#students-to-create + (#workers-to-create * probability-university-personel)) / 100) 1)
+    ; 1 workplace with 30 workers
+    set #workplaces-gp max (list ceiling (#workers-in-workplace-to-create / 30) 1)
+    ; 1 public leisure places can contain a maximum of 100 people 
+    set #public-leisure-gp max (list ceiling (#people-to-create / 100) 1)
+    ; Private leisure represents a gathering of family and/or friends (members of in-group). It is assumed that such gatherings, on average, involve ~10 persons (a max of 15p).
+    set #private-leisure-gp max ( list ceiling (#people-to-create / 15) 1)
+    ; Essential shops are places where people buy products that cater to the basic necessities of life (i.e. foods and drinks); examples are supermarkets and drugstores. It is presumed that there is an essential shop for every 250 persons.
+    set #essential-shops-gp max (list ceiling (#people-to-create / 250) 1)
+    ; Non-essential shops are considered to be places like retail stores. These stores offer products that are not bought to maintain a healthy level of subsistence, but rather to cater to materialist needs. It is presumed that a non-essential shop exists for every 100 persons.
+    set #non-essential-shops-gp max (list ceiling (#people-to-create / 100) 1)
+    set #bus-per-timeslot max (list ceiling ((#people-to-create - ((#workers-to-create + #retireds-to-create)* ratio-workers-and-retired-owning-cars)) / 50) 1)
+  ]
+  
+  if gp-scaling-mode = "default ASSOCC" [
+    set #hospital-gp floor (#hld / 100)
+    set #schools-gp floor (#hld / 30)
+    set #universities-gp floor (#hld / 50)
+    set #workplaces-gp floor (#hld / 10)
+    set #public-leisure-gp floor (#hld / 100)
+    set #private-leisure-gp floor (#hld / 10)
+    set #essential-shops-gp floor (#hld / 20)
+    set #non-essential-shops-gp floor (#hld / 10)
+    set #households #hld
+    set #bus-per-timeslot floor (#hld / 5)
+  ]
+end
+
+to load-closed-schools-and-uni-measures
+  set #days-trigger-school-closing-measure 0
+  set closed-universities? true
+end
+
+to load-all-closed-measures
+  set #days-trigger-non-essential-business-closing-measure 0
+  set #days-trigger-school-closing-measure 0
+  set closed-universities? true
+end
+
+to load-default-transport-model
+  
+  set ratio-motorized-work 0.618
+  set ratio-motorized-essential-shop 0.464 
+  set ratio-motorized-non-essential-shop 0.464
+  set ratio-motorized-school 0.194
+  set ratio-motorized-university 0.304
+  set ratio-motorized-private-leisure 0.49
+  set ratio-motorized-public-leisure 0.49
+  
+  set #bus-per-timeslot 10
+  set #max-people-per-bus 20
+  
+end
+
+to load-default-migration-model
+  set migration? false
+  set probability-infection-when-abroad 0.0
+  set probability-going-abroad 0
+  set probability-getting-back-when-abroad 0
+end
+
+to load-default-social-network-model
+  set network-generation-method "value-similarity"
+  set peer-group-friend-links 7
+  set percentage-of-agents-with-random-link 0.15
+end
+
+to load-default-disease-model
+  set disease-fsm-model "oxford"
+  set with-infected? true
+  set propagation-risk 0.15
+  set daily-risk-believe-experiencing-fake-symptoms 0
+  set critical-to-terminal 2
+  set probability-recorvery-if-treated-old 0.6
+  set probability-unavoidable-death-old 0.2
+  set probability-self-recovery-symptoms-old 0.1
+  set probability-unavoidable-death 0.1
+  set probability-recorvery-if-treated 0.1
+  set probability-self-recovery-symptoms 0.6
+  set factor-reduction-probability-transmission-young 0.69
+  ;specify default RNaught settings
+  set #consecutive-ticks-Rnaught-exceeds-1-to-trigger-implementing-measures 12
+  set #consecutive-ticks-Rnaught-is-below-1-to-trigger-lifting-measures 12
+  set #days-agent-R-naught-remains-in-population-Rnaught-after-moment-of-recovery 7
+end
+
+
+to load-default-contagion-model
+  set contagion-model "oxford"
+  ;specify default gathering point density factor settings
+  set density-factor-computation "default"
+  set gp-scaling-mode "default ASSOCC"
+  set ventilation-weight 4
+  set sterility-weight 2
+  set length-visit-time-weight 1
+  set crowdedness-weight 3
+  set max-density-factor 0.95
+  set min-density-factor 0.01
+end
+
+to load-default-economic-parameters
+  set productivity-at-home 1
+  set workers-wages 9
+  set price-of-rations-in-essential-shops 2.8
+  set price-of-rations-in-non-essential-shops 2.68
+  set days-of-rations-bought 3
+  set ratio-tax-on-essential-shops 0.52
+  set ratio-tax-on-non-essential-shops 0.52
+  set ratio-tax-on-workplaces 0.55
+  set ratio-tax-on-workers 0.37
+  set goods-produced-by-work-performed 12
+  set unit-price-of-goods 2.5
+  set max-stock-of-goods-in-a-shop 500
+  set starting-amount-of-capital-workers 75
+  set starting-amount-of-capital-retired 40
+  set starting-amount-of-capital-students 30
+  
+  set ratio-school-subsidy 0.03
+  set ratio-hospital-subsidy 0.04
+  set ratio-university-subsidy 0.03
+  
+  set government-pays-wages? false
+  set ratio-of-wage-paid-by-the-government 0.8
+  set government-initial-reserve-of-capital 10000
+  
+  ;error "work in progress"
+  set retirees-tick-subsidy 3
+  set students-tick-subsidy 1.5
+  set parent-individual-subsidy-per-child-per-tick 2
+  
+end
+
+to load-default-household-profiles
+  if sync-cultural-and-demographic-settings? = false [ 
+    set household-profiles "Custom"
+    load-population-profile-based-on-current-preset-profile 
+  ]
+end
+
+to load-population-profile-based-on-current-preset-profile
+  
+  if household-profiles = "Custom" [
+    set ratio-adults-homes ratio-adults-homes
+    set ratio-retired-couple-homes ratio-retired-couple-homes
+    set ratio-family-homes ratio-family-homes
+    set ratio-multi-generational-homes ratio-multi-generational-homes
+    set probability-shopkeeper probability-shopkeeper
+    set probability-university-personel probability-university-personel
+    set probability-school-personel probability-school-personel
+    set probability-hospital-personel probability-hospital-personel
+    set ratio-workers-and-retired-owning-cars ratio-workers-and-retired-owning-cars
+    set ratio-motorized-work 0.618
+    set ratio-motorized-essential-shop 0.464 
+    set ratio-motorized-non-essential-shop 0.464
+    set ratio-motorized-school 0.194
+    set ratio-motorized-university 0.304
+    set ratio-motorized-private-leisure 0.49
+    set ratio-motorized-public-leisure 0.49
+    stop
+  ]
+  
+  let country-specific-data-list []
+  file-open "country-specific-data.csv"
+  
+  
+  while [not file-at-end? ] [
+    let csv file-read-line
+    set csv word csv ";"  ; add comma for loop termination 
+    
+    let mylist []  ; list of values 
+    while [not empty? csv] 
+    [
+      let $x position ";" csv 
+      let $item substring csv 0 $x  ; extract item 
+      carefully [set $item read-from-string $item][] ; convert if number 
+      set mylist lput $item mylist  ; append to list 
+      set csv substring csv ($x + 1) length csv  ; remove item and comma 
+    ] 
+    if first mylist = household-profiles [
+      set country-specific-data-list but-first mylist ]
+  ]
+  if empty? country-specific-data-list [error (sentence "Country is not in country-specific-data.csv file" household-profiles)]
+  file-close
+  
+  set ratio-adults-homes item 0 country-specific-data-list
+  set ratio-retired-couple-homes item 1 country-specific-data-list
+  set ratio-family-homes item 2 country-specific-data-list
+  set ratio-multi-generational-homes item 3 country-specific-data-list
+  set probability-shopkeeper item 11 country-specific-data-list
+  set probability-university-personel item 12 country-specific-data-list
+  set probability-school-personel item 13 country-specific-data-list
+  set probability-hospital-personel item 14 country-specific-data-list
+  set ratio-workers-and-retired-owning-cars item 15 country-specific-data-list 
+  set ratio-hospital-beds-per-household item 16 country-specific-data-list
+  
+  set #adults-homes floor (#households * ratio-adults-homes)
+  set #retired-couple-homes floor (#households * ratio-retired-couple-homes)
+  set #family-homes floor (#households * ratio-family-homes)
+  set #multi-generational-homes #households - (#adults-homes + #retired-couple-homes + #family-homes)
+  set #workers-to-create #adults-homes + (#family-homes * 2) + (#multi-generational-homes * 2)
+  set #students-to-create #adults-homes 
+  set #youth-to-create (#family-homes * 2) + (#multi-generational-homes * 2)
+  set #retireds-to-create (#retired-couple-homes * 2) +  (#multi-generational-homes * 2)
+  set #people-to-create #retireds-to-create + #youth-to-create + #students-to-create + #workers-to-create
+  set #workers-in-workplace-to-create floor #workers-to-create * ( 1 - probability-hospital-personel - probability-school-personel - probability-university-personel - probability-shopkeeper) 
+  
+  set ratio-motorized-work 0.618
+  set ratio-motorized-essential-shop 0.464 
+  set ratio-motorized-non-essential-shop 0.464
+  set ratio-motorized-school 0.194
+  set ratio-motorized-university 0.304
+  set ratio-motorized-private-leisure 0.49
+  set ratio-motorized-public-leisure 0.49
+  
+end
+
+to load-default-culture-values-and-needs-parameter-settings
+  ; General cultural model settings
+  if cultural-model-experimentation = "default-cultural-model-settings" [
+    set load-country-specific-settings "Custom"
+    set hofstede-schwartz-mapping-mode "theoretical"
+    set cultural-tightness 50
+  ]
+  ; Sync cultural profile with other country-based settings
+  set sync-cultural-and-demographic-settings? true
+  ; Values
+  set value-system-calibration-factor 20
+  set min-value-std-dev 5
+  set max-value-std-dev 15
+  
+  set cultural-tightness-function-modifier 0.1
+  set activate-intra-cultural-variation? true
+  set influence-of-age-on-value-system 5
+  ; Needs
+  set weight-survival-needs 0.5
+  set financial-stability-learning-rate 0.05
+  ; Social distancing & quarantining (self-isolation) variables
+  set make-social-distance-profile-value-based? true
+  set mean-social-distance-profile 0.5
+  
+  ;set SA variables to their default states if sensitivity analysis is switched off
+  if not sensitivity-analysis? [
+    ;set contagion-factor 10
+    ;set social-distancing-density-factor 0.45
+    set std-dev-social-distance-profile 0.1
+    ; Default range of random values generated between 40 - 60
+    set max-random-value-generator 60
+    set min-random-value-generator 20
+    set survival-multiplier 2.5
+    set maslow-multiplier 0
+  ]
+  
+  set is-decision-to-quarantine-value-based? true
+end
+

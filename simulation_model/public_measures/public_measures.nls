@@ -1,0 +1,243 @@
+__includes["public_measures/global_quarantine.nls" "public_measures/tracing_app.nls" "public_measures/testing.nls" "public_measures/school_closing.nls" "public_measures/phasing_out.nls"]
+
+globals [
+  was-social-distancing-enforced?
+  #tests-done-today
+  rnaught-exceeds-1-for-first-time?
+  is-soft-lockdown-measure-activated?
+  is-hard-lockdown-measure-activated?
+]
+
+to-report is-hard-lockdown-active?
+  if global-confinement-measures = "total-lockdown"[
+    set is-hard-lockdown-measure-activated? true
+    report true
+  ]
+  if global-confinement-measures = "lockdown-10-5" [
+    if global-confinement-metric = "infection-ratio" [
+      if(ratio-infected > 0.1 or (is-hard-lockdown-measure-activated? and ratio-infected > 0.05)) [
+        set is-hard-lockdown-measure-activated? true
+        report true
+      ]
+      if ratio-infected <= 0.05 [ 
+        set is-hard-lockdown-measure-activated? false
+        report false
+      ]
+    ]
+    if global-confinement-metric = "RNaught" [
+      
+      ;use infection rate based trigger for initial trigger of lockdown measures (i.e. only if rnaught has not exceeded 1 yet!)
+      if rnaught-exceeds-1-for-first-time? = false and ratio-infected > infection-rate-based-trigger [      
+        set is-hard-lockdown-measure-activated? true
+        set is-working-from-home-recommended? true
+        report true
+      ]
+      
+      ;then if rnaught has exceeded 1 for first time, start using it to activate and lift measures
+      if rnaught-exceeds-1-for-first-time? [
+        ;after initial trigger, use the rnaught metric to activate or lift measures
+        ;condition 1: activate measure when rnaught exceeds 1 for a specified amount of time
+        ;condition 2: keep measure activated as long as rnaught does not drop below one for a specified amount of time
+        if (consecutive-ticks-R-naught-is->=-one >= #consecutive-ticks-Rnaught-exceeds-1-to-trigger-implementing-measures) or 
+        (consecutive-ticks-R-naught-is-<-one < #consecutive-ticks-Rnaught-is-below-1-to-trigger-lifting-measures) [
+          set is-hard-lockdown-measure-activated? true
+          set is-working-from-home-recommended? true
+          report true
+        ]
+        ;if rnaught stays below 1 for a sufficient amount of time, then measure is lifted
+        ;keep measure lifted as long as rnaught does not exceed 1 for a specified amount of time
+        if (consecutive-ticks-R-naught-is-<-one >= #consecutive-ticks-Rnaught-is-below-1-to-trigger-lifting-measures) [
+          set is-hard-lockdown-measure-activated? false
+          set is-working-from-home-recommended? false
+          report false
+        ]
+      ]
+      
+    ]
+  ]        
+  report false
+end
+
+to-report closed-non-essential?
+  if is-hard-lockdown-measure-activated? [
+    report true 
+  ]
+  
+  report ratio-infected > ratio-omniscious-infected-that-trigger-non-essential-closing-measure
+  or
+  #days-trigger-non-essential-business-closing-measure <= current-day
+end
+
+to-report is-soft-lockdown-active?
+  if global-confinement-measures = "soft-lockdown-5-2" [
+    if global-confinement-metric = "infection-ratio" [
+      if (ratio-infected > 0.05 or (is-soft-lockdown-measure-activated? and ratio-infected > 0.02 )) [
+        set is-soft-lockdown-measure-activated? true
+        report true
+      ]
+      if ratio-infected <= 0.02 [
+        		set is-soft-lockdown-measure-activated? false
+        		report false
+      ]
+    ]
+    if global-confinement-metric = "RNaught" [
+      ;use infection rate based trigger for initial trigger of lockdown measures (i.e. only if rnaught has not exceeded 1 yet!)
+      if rnaught-exceeds-1-for-first-time? = false and ratio-infected > infection-rate-based-trigger [    
+        set is-working-from-home-recommended? true
+        set keep-retired-quarantined-forever-if-global-quarantine-is-fired-global-measure? true
+        set is-soft-lockdown-measure-activated? true
+        report true
+      ]
+      
+      ;then if rnaught has exceeded 1 for first time, start using it to activate and lift measures
+      if rnaught-exceeds-1-for-first-time? [
+        ;after initial trigger, use the rnaught metric to activate or lift measures
+        ;condition 1: activate measure when rnaught exceeds 1 for a specified amount of time
+        ;condition 2: keep measure activated as long as rnaught does not drop below one for a specified amount of time
+        if (consecutive-ticks-R-naught-is->=-one >= #consecutive-ticks-Rnaught-exceeds-1-to-trigger-implementing-measures) or 
+        (consecutive-ticks-R-naught-is-<-one < #consecutive-ticks-Rnaught-is-below-1-to-trigger-lifting-measures) [
+          set is-soft-lockdown-measure-activated? true
+          set keep-retired-quarantined-forever-if-global-quarantine-is-fired-global-measure? true
+          set is-working-from-home-recommended? true
+          report true 
+        ]
+        ;if rnaught stays below 1 for a sufficient amount of time, then measure is lifted
+        ;keep measure lifted as long as rnaught does not exceed 1 for a specified amount of time
+        if (consecutive-ticks-R-naught-is-<-one >= #consecutive-ticks-Rnaught-is-below-1-to-trigger-lifting-measures) [
+          set is-soft-lockdown-measure-activated? false
+          set is-working-from-home-recommended? false
+          set keep-retired-quarantined-forever-if-global-quarantine-is-fired-global-measure? false
+          report false
+        ]
+      ]
+    ]
+  ]
+  report false
+end
+
+to-report is-social-distancing-testing-tracking-and-tracing-active?
+  if global-confinement-measures = "social-distancing-testing-tracking-and-tracing" [
+    if global-confinement-metric = "infection-ratio" [
+      if when-is-tracing-app-active? = "always" and when-is-daily-testing-applied? = "always" [
+        report true
+      ]
+    ]
+    if global-confinement-metric = "RNaught" [
+      if (rnaught-exceeds-1-for-first-time? = false and ratio-infected > infection-rate-based-trigger) or rnaught-exceeds-1-for-first-time? [   
+        report true
+      ]
+    ]
+  ]
+  report false
+end
+
+
+
+to apply-active-measures
+  if slice-of-the-day = "morning" [ ; Reset the available tests
+    set #tests-done-today 0
+  ]
+  
+  perform-daily-testing-public-measure
+  update-global-quarantine-measure
+  update-tracing-app-public-measure
+  
+  if was-social-distancing-enforced?  [
+    inform-people-of-measures
+  ]
+  
+  if global-confinement-measures = "none" and ratio-infected > infection-rate-based-trigger [
+    ask n-of (count people * percentage-news-watchers) people [ 
+      set I-know-of-corona-virus? true ] 
+  ]
+  
+  check-phasing-out
+end
+
+
+
+to-report #still-available-tests
+  report #available-tests - #tests-done-today
+end
+
+to-report is-social-distancing-measure-active?
+  if global-confinement-metric = "infection-ratio" and global-confinement-measures != "none" [
+    if ratio-omniscious-infected-that-trigger-social-distancing-measure < ratio-infected [
+      set was-social-distancing-enforced? true
+      report true 
+    ]
+  ]
+  if global-confinement-metric = "RNaught" and global-confinement-measures != "none" [
+    if rnaught-exceeds-1-for-first-time? = false and ratio-infected > infection-rate-based-trigger or rnaught-exceeds-1-for-first-time? [
+      set was-social-distancing-enforced? true 
+      report true
+    ] 
+  ]
+  if was-social-distancing-enforced? [
+    report true 
+  ]
+  report false 
+end
+
+
+to inform-people-of-measures
+  ask n-of (count people * percentage-news-watchers) people [
+    set I-know-of-social-distancing? true
+    set I-know-of-working-from-home? true
+    set I-know-of-corona-virus? true
+  ]
+  set is-infected-and-their-families-requested-to-stay-at-home? true
+end
+
+to-report is-quarantining-measure-active?
+  if is-infected-and-their-families-requested-to-stay-at-home? or is-soft-lockdown-measure-activated? [
+    report true
+  ]
+  report false
+end
+
+to-report should-be-isolators
+  report people with [any? ([gatherers] of my-home) with [is-believing-to-be-infected?]]
+end
+
+to disable-all-measures
+  ; Keep schools, university, workplaces open
+  set ratio-omniscious-infected-that-trigger-school-closing-measure 1
+  set ratio-omniscious-infected-that-trigger-social-distancing-measure 1
+  set ratio-omniscious-infected-that-trigger-non-essential-closing-measure 1
+  set #days-trigger-school-closing-measure 10000
+  set #days-trigger-non-essential-business-closing-measure 10000
+  set is-closing-school-when-any-reported-case-measure? false
+  set close-schools-during-global-quarantine? false
+  set force-reopening-of-schools-after-phase "never"
+  set global-confinement-measures "none"
+  set closed-universities? false
+  set closed-workplaces? false
+  ; Disable testing
+  set ratio-population-randomly-tested-daily 0
+  set ratio-population-daily-immunity-testing 0
+  set #available-tests 10000
+  set test-home-of-confirmed-people? false
+  set test-workplace-of-confirmed-people? false
+  set prioritize-testing-health-care? false
+  set prioritize-testing-education? false
+  set do-not-test-youth? true
+  set only-test-retirees-with-extra-tests? false
+  set when-is-daily-testing-applied? "never"
+  ; Disable tracing (Smartphone App)
+  set ratio-of-people-using-the-tracking-app 0
+  ; Disable self-isolation (quarantining)
+  set is-infected-and-their-families-requested-to-stay-at-home? false
+  set food-delivered-to-isolators? true
+  set is-psychorigidly-staying-at-home-when-quarantining? false
+  set ratio-self-quarantining-when-symptomatic 0
+  set ratio-self-quarantining-when-a-family-member-is-symptomatic 0
+  set is-working-from-home-recommended? false
+  ; disable phasing of policy measures
+  set condition-for-acknowledging-the-crisis "never"
+  set condition-phasing-out "never"
+  
+  disable-global-quarantine-measure
+  disable-tracing-app-measure
+  disable-daily-testing-measure
+end

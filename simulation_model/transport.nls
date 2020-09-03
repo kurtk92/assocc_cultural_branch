@@ -1,0 +1,138 @@
+globals [
+  is-busses-overrun? 
+  #denied-attempts-due-to-bus-overload
+  list-of-buses
+  #people-denied-bus
+  ratio-motorized-work
+  ratio-motorized-essential-shop 
+  ratio-motorized-non-essential-shop 
+  ratio-motorized-school 
+  ratio-motorized-university 
+  ratio-motorized-private-leisure 
+  ratio-motorized-public-leisure
+]
+
+to-report my-transport-mode-for-given-activity [loc]
+  ifelse current-activity = loc
+  [ report "stay-here"]  
+  [ ifelse used-motorized? or member? loc list-motorized-locations   
+    [ifelse do-I-possess-a-car? 
+      [report "solo"] 
+      [report "public"]
+    ]
+    [report "solo"]
+  ]
+end
+
+to update-used-motorized?
+  ifelse current-activity = my-home 
+    [set used-motorized? false ]
+    [if  member? current-activity list-motorized-locations [
+    set used-motorized? true ]]
+  
+    
+end
+
+to setup-transport-modes
+  let m_list (list) 
+  set do-I-possess-a-car? false
+  let p random-float 1 
+  if p < ratio-motorized-work [
+    ask gathering-points with [is-workplace?] [ 
+      set m_list fput self m_list ] 
+  ]
+  if p < ratio-motorized-essential-shop [
+    ask gathering-points with [is-essential-shop?] [
+      set m_list fput self m_list ]
+  ]
+  if p < ratio-motorized-non-essential-shop [
+    ask gathering-points with [is-non-essential-shop?] [
+      set m_list fput self m_list ]
+  ]
+  if p < ratio-motorized-school [
+    ask gathering-points with [is-school?] [
+      set m_list fput self m_list ]
+  ]
+  if p < ratio-motorized-university [
+    ask gathering-points with [is-university?] [
+      set m_list fput self m_list ]
+  ]
+  if p < ratio-motorized-private-leisure [
+    ask gathering-points with [is-private-leisure?] [
+      set m_list fput self m_list ]
+  ]
+  if p < ratio-motorized-public-leisure [
+    ask gathering-points with [is-public-leisure?] [
+      set m_list fput self m_list ]
+  ]
+                
+  set list-motorized-locations m_list
+  
+  if age = "retired"  or age = "worker" [
+    if p < ratio-workers-and-retired-owning-cars 
+    [ set do-I-possess-a-car? true ]
+  ]
+end
+  
+  
+to travelling-to-activity-phase 
+  set is-busses-overrun? false
+  
+  move-on-display
+
+
+
+  let bus-users (turtle-set)
+  
+  ask people [
+    set stayed-out-queuing-for-bus? false
+    if current-transport-mode = public-transportation-method [set bus-users (turtle-set bus-users self)]
+  ]
+  
+  set list-of-buses n-values #bus-per-timeslot [x -> (turtle-set)]
+  let #users-in-buses 0
+  
+  ask bus-users [
+    if #users-in-buses >= max-total-bus-flow-at-current-timestep - 1 [
+      set #people-denied-bus #people-denied-bus + 1 
+      set stayed-out-queuing-for-bus? true stop]
+    let random-item random length list-of-buses
+    if count item random-item list-of-buses = #max-people-per-bus [set stayed-out-queuing-for-bus? true]
+    
+    while[count (item random-item list-of-buses) = #max-people-per-bus]
+    [set random-item (random-item + 1) mod length list-of-buses]
+    
+    set list-of-buses replace-item random-item list-of-buses (turtle-set self (item random-item list-of-buses))
+    set #users-in-buses #users-in-buses + 1
+  ] 
+  
+ 
+  
+end
+
+to-report max-total-bus-flow-at-current-timestep
+  report #bus-per-timeslot * #max-people-per-bus
+end
+
+to-report stay-here-transportation-method
+  report "stay-here"
+end
+
+to-report solo-transportation-method
+  report "solo"
+end
+
+to-report public-transportation-method
+  report "public"
+end
+
+
+to move-on-display 
+  ask people
+  [
+    if not animate? [
+      move-to one-of [patches in-radius 3  with [pxcor > [pxcor] of myself]] of current-activity
+      set heading towards current-activity
+    ]
+  ]
+end
