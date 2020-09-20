@@ -44,10 +44,10 @@ end
 to set-initial-need-satisfaction-levels
   ;NOTE: The water tanks for financial safety (SAFETY), food safety (SURVIVAL), financial survival (SURVIVAL), health (SURVIVAL) are located in the need_defintion.nls file
   ;The subneeds defined in need_defintion.nls are not formalized as people-own variables but as to-reporter functions
-
+  
   ask people [
     ;Initiate need satisfaction levels (i.e. fill up watertanks)
-
+    
     ;SURVIVAL:
     set sleep-satisfaction-level random-float 0.2 + 0.8
     
@@ -55,10 +55,10 @@ to set-initial-need-satisfaction-levels
     set risk-avoidance-satisfaction-level random-float 0.3 + 0.7
     set compliance-satisfaction-level random-float 0.3 + 0.7
     set conformity-satisfaction-level random-float 1
-
+    
     ;BELONGING:
     set belonging-satisfaction-level random-float 0.5 + 0.5
-
+    
     ;SELF-ESTEEM:
     set leisure-satisfaction-level random-float 0.1 + 0.9
     set luxury-satisfaction-level random-float 0.3 + 0.7
@@ -70,17 +70,17 @@ to set-social-distance-profile
   ask people [
     ;Calibrate social distance variables
     ifelse make-social-distance-profile-value-based? [
-
+      
       ;extroverts tend to value achievement, stimulation, hedonism (Roccas et al., 2002)
       ;extroversion relates to tendency to approach / interact with people.
       let extroversion (importance-given-to-achievement-value + importance-given-to-stimulation-value + (0.5 * importance-given-to-hedonism-value)) / 2.5
       set extroversion extroversion / 100
-
+      
       ;introverts tend to value conformity & tradition, security (Roccas et al., 2002)
       ;introversion relates to tendency to avoid / not interact with people.
       let introversion (importance-given-to-conformity-tradition-value + importance-given-to-security-value) / 2
       set introversion introversion / 100
-
+      
       ifelse extroversion > introversion [
         ;the more extrovert the agent, the HIGHER its social distance profile.
         set social-distance-profile clamp 0 1 random-normal extroversion std-dev-social-distance-profile
@@ -98,8 +98,8 @@ end
 
 
 to recalibrate-value-system-according-to-age-group-of-agent
- ask people [
-
+  ask people [
+    
     ;coefficients based on "Correlations of Value Priorities with Age" (see http://essedunet.nsd.uib.no/cms/topics/1/2/2.html)
     let HED_coeff -0.34
     let STM_coeff -0.38
@@ -110,7 +110,7 @@ to recalibrate-value-system-according-to-age-group-of-agent
     let SEC_coeff 0.26
     let POW_coeff -0.07
     let ACH_coeff -0.25
-
+    
     let coeffs (list
       HED_coeff
       STM_coeff
@@ -121,7 +121,7 @@ to recalibrate-value-system-according-to-age-group-of-agent
       SEC_coeff
       POW_coeff
       ACH_coeff)
-
+    
     let value_system (list
       importance-given-to-hedonism-value
       importance-given-to-stimulation-value
@@ -155,29 +155,29 @@ to recalibrate-value-system-according-to-age-group-of-agent
 end
 
 to calibrate-importance-weights-of-needs
-
+  
   ;For each agent: set the importance ascribed to its needs
   ;Importance weights ascribed to needs vary between 0 and 1
-
+  
   ;IMPORTANT VARIABLES:
   ;maslow-multiplier = modulates the hierarchical aspect of maslow needs ...
   ; ... i.e. the higher the maslow-multiplier, the higher the importance ascribed to lower level needs vis-a-vis those situated at higher levels in the Maslow pyramid.
   ;survival-multiplier = increases the importance ascribed to biological (survival) needs vis-a-vis psychological needs (safety, belonging, esteem).
-
+  
   ask people [
     ;initiate maslow-based importance weights for the maslow need categories
     let weight-esteem-needs-category 1
     let weight-belonging-needs-category weight-esteem-needs-category * (1 + maslow-multiplier)
     let weight-safety-needs-category weight-belonging-needs-category * (1 + maslow-multiplier)
     let weight-survival-needs-category weight-safety-needs-category * ((1 + maslow-multiplier) * survival-multiplier)
-
+    
     ;Set importance weights of subneeds of SURVIVAL
     set importance-weight-food-safety (weight-survival-needs * weight-survival-needs-category)
     set importance-weight-financial-survival (weight-survival-needs * weight-survival-needs-category)
     set importance-weight-health (weight-survival-needs * weight-survival-needs-category)
     set importance-weight-sleep (weight-survival-needs * weight-survival-needs-category)
     
-
+    
     ;Set importance weights of subneeds of SAFETY
     set importance-weight-financial-stability (importance-given-to-power-value / 100) * weight-safety-needs-category
     set importance-weight-risk-avoidance (importance-given-to-security-value / 100) * weight-safety-needs-category
@@ -186,12 +186,12 @@ to calibrate-importance-weights-of-needs
     
     ;Set importance weights of subneeds of BELONGING
     set importance-weight-belonging-subneed ((importance-given-to-benevolence-value + importance-given-to-conformity-tradition-value) / (2 * 100)) * weight-belonging-needs-category
-
+    
     ;Set importance weights of subneeds of ESTEEM
     set importance-weight-luxury ((importance-given-to-hedonism-value + importance-given-to-power-value) / (2 * 100)) * weight-esteem-needs-category
     set importance-weight-leisure ((importance-given-to-hedonism-value + importance-given-to-stimulation-value) / (2 * 100)) * weight-esteem-needs-category
     set importance-weight-autonomy ((importance-given-to-self-direction-value + importance-given-to-achievement-value) / (2 * 100)) * weight-esteem-needs-category
-
+    
     let total-sum-of-weights sum (list
       importance-weight-food-safety
       importance-weight-financial-survival
@@ -205,7 +205,7 @@ to calibrate-importance-weights-of-needs
       importance-weight-luxury
       importance-weight-leisure
       importance-weight-autonomy)
-
+    
     ;Normalize all the importance weights so that they sum up to 1
     set importance-weight-food-safety (importance-weight-food-safety / total-sum-of-weights)
     set importance-weight-financial-survival (importance-weight-financial-survival / total-sum-of-weights)
@@ -223,7 +223,7 @@ to calibrate-importance-weights-of-needs
 end
 
 to set-values-based-on-culture
-
+  
   ;;; HOFSTEDE - SCHWARTZ MAPPING ;;;
   
   let UAI_pos uncertainty-avoidance
@@ -232,7 +232,7 @@ to set-values-based-on-culture
   let IDV_pos individualism-vs-collectivism
   let IVR_pos indulgence-vs-restraint
   let LTO_pos long-vs-short-termism
-
+  
   let UAI_neg 100 - uncertainty-avoidance
   let PDI_neg 100 - power-distance
   let MAS_neg 100 - masculinity-vs-femininity
@@ -249,10 +249,10 @@ to set-values-based-on-culture
   let mean_SEC 0
   let mean_POW 0
   let mean_ACH 0
-
+  
   let max_val max-random-value-generator
   let min_val min-random-value-generator
-
+  
   if hofstede-schwartz-mapping-mode = "old settings" [
     set mean_HED (IDV_pos + IVR_pos) / 2
     set mean_STM (IDV_pos + UAI_neg + PDI_neg ) / 3
@@ -303,13 +303,13 @@ to set-values-based-on-culture
   ]
   
   ;;; CULTURAL TIGHTNESS MAPPING ;;;
-
+  
   let max_CLT 100
   let CLT cultural-tightness / (max_CLT / max-value-std-dev)
   let SD clamp min-value-std-dev max-value-std-dev (max-value-std-dev - CLT)
   ;calibrate value-std-dev according to country's tightness score
   set value-std-dev SD
-
+  
   ;alpha determines output (y) for central value (i.e. x = 50)
   let alpha 50
   ;beta determines degree to which the logistic function distorts extreme values (i.e. values close to 0 or to 1) of the input (Vraw)
@@ -317,7 +317,7 @@ to set-values-based-on-culture
   let max-beta 5.5
   let beta (0.01 * max-beta) - (value-std-dev * (0.01 * cultural-tightness-function-modifier))
   let product alpha * beta
-
+  
   ;Vraw is computed on the basis of Hofstede dims
   ;Vfinal is the mean that is used to calibrate the agent's value system
   ;If Vraw is extreme (i.e. smaller than 10 or greater than 90), it will be transformed into a number that lies closer to alpha (alpha=50)
@@ -331,10 +331,10 @@ to set-values-based-on-culture
     mean_SEC
     mean_POW
     mean_ACH)
-
+  
   let max_value_level 100
   let Vfinal []
-
+  
   ;loop through agent value system and transform the 'extreme' means (i.e. those that are smaller than 10 or higher than 90)
   foreach Vraw [
     vmean -> if vmean <= 10 or vmean >= 90 [
@@ -345,7 +345,7 @@ to set-values-based-on-culture
     ;add vmeans to Vfinal
     set Vfinal lput vmean Vfinal
   ]
-
+  
   ask people [
     set importance-given-to-hedonism-value clamp 0.01 100 (random-normal (item 0 Vfinal) value-std-dev)
     set importance-given-to-stimulation-value clamp 0.01 100 (random-normal (item 1 Vfinal) value-std-dev)
@@ -357,7 +357,7 @@ to set-values-based-on-culture
     set importance-given-to-power-value clamp 0.01 100 (random-normal (item 7 Vfinal) value-std-dev)
     set importance-given-to-achievement-value clamp 0.01 100 (random-normal (item 8 Vfinal) value-std-dev)
   ]
-
+  
 end
 
 ;Increase logical consistency of agent value systems
@@ -365,7 +365,7 @@ end
 ;Values placed further from one another on the Schwartz model should have dissimilar importance levels
 to increase-logical-consistency-of-agent-value-systems
   ask people [
-
+    
     let value_system (list
       importance-given-to-hedonism-value
       importance-given-to-stimulation-value
@@ -378,39 +378,39 @@ to increase-logical-consistency-of-agent-value-systems
       importance-given-to-achievement-value)
     
     let value_system_copy value_system
-
+    
     let N length value_system_copy
-
+    
     let index 0
     let index_i 0
     let index_j 0
-
+    
     let Vi 0
     let Vj 0
     let Vi_update 0
     let Vj_update 0
-
+    
     while [index < N ] [
       ;load unaltered Vi
       set Vi item index value_system_copy
-
+      
       ;walk through value system and compare each index the rest starting with item 0 thru length of list (9 values)
       set index_i index
       set index_j index_i + 1
-
+      
       while [index_j < N] [
         ;load unaltered Vj
         set Vj item index_j value_system_copy
-
+        
         set Vi_update item 0 calibrate-values index_i index_j value_system_copy
         set Vj_update item 1 calibrate-values index_i index_j value_system_copy
-
+        
         if Vi_update != Vi [
           set value_system_copy replace-item index_i value_system_copy Vi_update
           ;update Vi
           set Vi Vi_update
         ]
-
+        
         if Vj_update != Vj [
           set value_system_copy replace-item index_j value_system_copy Vj_update
         ]
@@ -418,7 +418,7 @@ to increase-logical-consistency-of-agent-value-systems
       ]
       set index index + 1
     ]
-
+    
     ;check whether values have changed as a consequence of the foregoing calibration procedure
     ;first create some easy-to-work-with variables
     let HED_index position importance-given-to-hedonism-value value_system
@@ -452,7 +452,11 @@ end
 
 ;scores taken from https://www.hofstede-insights.com/product/compare-countries/
 to load-nations-cultural-profile-settings
-
+  
+  if control-for-non-cultural-country-specific-factors? [
+    set load-country-specific-settings "World"
+  ]
+  
   if load-country-specific-settings = "Custom" [
     set power-distance power-distance
     set individualism-vs-collectivism individualism-vs-collectivism
@@ -464,14 +468,11 @@ to load-nations-cultural-profile-settings
     stop
   ]
   
- let country-specific-data-list []
+  let country-specific-data-list []
   file-open "country-specific-data.csv"
-  
-
   while [not file-at-end? ] [
     let csv file-read-line
     set csv word csv ";"  ; add comma for loop termination 
-
     let mylist []  ; list of values 
     while [not empty? csv] 
     [
@@ -481,11 +482,31 @@ to load-nations-cultural-profile-settings
       set mylist lput $item mylist  ; append to list 
       set csv substring csv ($x + 1) length csv  ; remove item and comma 
     ] 
-    
     if first mylist = load-country-specific-settings [
       set country-specific-data-list but-first mylist ]
   ]
   if empty? country-specific-data-list [error (sentence "Country is not in country-specific-data file" load-country-specific-settings)]
+  file-close
+  
+  ;create copy of country-specific-data used for experimentation where hofstede dimensions are calibrated independently from other country specific variables.
+  let alternate-country-specific-data-list []
+  file-open "country-specific-data.csv"
+  while [not file-at-end? ] [
+    let csv file-read-line
+    set csv word csv ";"
+    let mylist []
+    while [not empty? csv] 
+    [
+      let $x position ";" csv 
+      let $item substring csv 0 $x
+      carefully [set $item read-from-string $item][]
+      set mylist lput $item mylist
+      set csv substring csv ($x + 1) length csv
+    ]
+    if first mylist = load-country-hofstede-scores [
+      set alternate-country-specific-data-list but-first mylist ]
+  ]
+  if empty? alternate-country-specific-data-list [error (sentence "Country is not in country-specific-data file" load-country-hofstede-scores)]
   file-close
   
   if sync-cultural-and-demographic-settings? [
@@ -500,7 +521,7 @@ to load-nations-cultural-profile-settings
     set probability-hospital-personel item 14 country-specific-data-list
     set ratio-workers-and-retired-owning-cars item 15 country-specific-data-list
     set ratio-hospital-beds-per-household item 16 country-specific-data-list
-   
+    
     set #adults-homes floor (#households * ratio-adults-homes)
     set #retired-couple-homes floor (#households * ratio-retired-couple-homes)
     set #family-homes floor (#households * ratio-family-homes)
@@ -512,7 +533,6 @@ to load-nations-cultural-profile-settings
     set #people-to-create #retireds-to-create + #youth-to-create + #students-to-create + #workers-to-create
     set #workers-in-workplace-to-create floor #workers-to-create * ( 1 - probability-hospital-personel - probability-school-personel - probability-university-personel - probability-shopkeeper) 
     
-    
     set ratio-motorized-work 0.618
     set ratio-motorized-essential-shop 0.464 
     set ratio-motorized-non-essential-shop 0.464
@@ -520,8 +540,6 @@ to load-nations-cultural-profile-settings
     set ratio-motorized-university 0.304
     set ratio-motorized-private-leisure 0.49
     set ratio-motorized-public-leisure 0.49
-    
-    
   ]
   
   ;Calibrate the 7x cultural variables
@@ -534,24 +552,35 @@ to load-nations-cultural-profile-settings
     set indulgence-vs-restraint indulgence-vs-restraint
     set cultural-tightness cultural-tightness
   ][
-    set power-distance item 4 country-specific-data-list
-    set individualism-vs-collectivism item 5 country-specific-data-list
-    set masculinity-vs-femininity item 6 country-specific-data-list
-    set uncertainty-avoidance item 7 country-specific-data-list
-    set long-vs-short-termism item 8 country-specific-data-list
-    set indulgence-vs-restraint item 9 country-specific-data-list
-    set cultural-tightness round item 10 country-specific-data-list
+    ifelse control-for-non-cultural-country-specific-factors? [
+      set power-distance item 4 alternate-country-specific-data-list
+      set individualism-vs-collectivism item 5 alternate-country-specific-data-list
+      set masculinity-vs-femininity item 6 alternate-country-specific-data-list
+      set uncertainty-avoidance item 7 alternate-country-specific-data-list
+      set long-vs-short-termism item 8 alternate-country-specific-data-list
+      set indulgence-vs-restraint item 9 alternate-country-specific-data-list
+      set cultural-tightness round item 10 alternate-country-specific-data-list
+    ][
+      set load-country-hofstede-scores load-country-specific-settings
+      set power-distance item 4 country-specific-data-list
+      set individualism-vs-collectivism item 5 country-specific-data-list
+      set masculinity-vs-femininity item 6 country-specific-data-list
+      set uncertainty-avoidance item 7 country-specific-data-list
+      set long-vs-short-termism item 8 country-specific-data-list
+      set indulgence-vs-restraint item 9 country-specific-data-list
+      set cultural-tightness round item 10 country-specific-data-list 
+    ]
   ]
   
 end
 
 ;the computational procedure within this reporter is based on Heidari et al. (2018)
 to-report calibrate-values [#index_i #index_j #value-system]
-
+  
   ;Load value levels into local variable
   let V_i (item #index_i #value-system)
   let V_j (item #index_j #value-system)
-
+  
   ;determine difference between indices (i.e. distance between values on the Schwartz circumplex)
   let d_index abs (#index_i - #index_j)
   ;determine difference in value levels
@@ -559,34 +588,34 @@ to-report calibrate-values [#index_i #index_j #value-system]
   ;load calibration factor (a lower calibration factor means that values placed close to one another on the Schwartz circumplex will hold more similar importance levels)
   ;default setting for value-system-calibration-factor is 25 (based on Heidari et al., 2018)
   let cf value-system-calibration-factor
-
+  
   ;initiate boundaries LB (lower bound), UB (upper bound) (this is based on condition 1; see Heidari et al., 2018)
   let LB 0
   let UB 0
   let UB_i d_index * cf
   let UB_j (10 - d_index) * cf
-
+  
   ifelse d_index <= 5 [
     set UB UB_i
   ][
     set UB UB_j
   ]
-
+  
   ;d_Vc is constrained (c) difference (d) between value levels (V)
   let d_Vc 0
   ifelse d_V > UB [
     ;if difference between value levels is higher than UB, set dVc to UB
-   set d_Vc UB
+    set d_Vc UB
   ][
     ;if difference between value levels is NOT higher than UB, set dVc to dV
-   set d_Vc d_V
+    set d_Vc d_V
   ]
-
+  
   ;determine difference between unconstrained delta value levels [dV] and constrained delta value levels [dVc]
   let diff_dV_dVc (d_V - d_Vc)
-
+  
   let delta 0
-
+  
   ;ONLY if dV > dVc, then values move closer towards one another as to respect the condition LB < dV < UB
   if d_V > d_Vc [
     set delta diff_dV_dVc / 2

@@ -2397,10 +2397,10 @@ NIL
 1
 
 CHOOSER
-3284
-127
-3564
-172
+3289
+117
+3569
+162
 load-country-specific-settings
 load-country-specific-settings
 "Custom" "Belgium" "Canada" "Germany" "Great Britain" "France" "Italy" "Korea South" "Netherlands" "Norway" "Spain" "Singapore" "Sweden" "U.S.A." "World"
@@ -2415,7 +2415,7 @@ uncertainty-avoidance
 uncertainty-avoidance
 0
 100
-26.5299750459029
+85.0
 1
 1
 NIL
@@ -2430,7 +2430,7 @@ individualism-vs-collectivism
 individualism-vs-collectivism
 0
 100
-73.319162656274
+18.0
 1
 1
 NIL
@@ -2445,7 +2445,7 @@ power-distance
 power-distance
 0
 100
-84.2721148549869
+60.0
 1
 1
 NIL
@@ -2460,7 +2460,7 @@ indulgence-vs-restraint
 indulgence-vs-restraint
 0
 100
-27.4936266655157
+29.0
 1
 1
 NIL
@@ -2475,7 +2475,7 @@ masculinity-vs-femininity
 masculinity-vs-femininity
 0
 100
-15.9669307126712
+39.0
 1
 1
 NIL
@@ -2490,7 +2490,7 @@ long-vs-short-termism
 long-vs-short-termism
 0
 100
-92.3293488241374
+100.0
 1
 1
 NIL
@@ -2542,10 +2542,10 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-3495
-31
-4003
-52
+3388
+11
+3896
+32
 Country-Based Cultural Profile Model
 16
 83.0
@@ -2697,9 +2697,9 @@ HORIZONTAL
 
 TEXTBOX
 3284
-181
+176
 3618
-208
+203
 Hofstede dimension settings
 11
 83.0
@@ -3988,7 +3988,7 @@ cultural-tightness
 cultural-tightness
 0
 100
-44.9301001103642
+82.0
 1
 1
 NIL
@@ -4052,19 +4052,19 @@ HORIZONTAL
 
 CHOOSER
 3284
-201
+196
 3529
-246
+241
 hofstede-schwartz-mapping-mode
 hofstede-schwartz-mapping-mode
 "theoretical" "empirical" "empirical & theoretical" "old settings"
 2
 
 SWITCH
-3582
-85
-3954
-118
+3584
+48
+3956
+81
 sync-cultural-and-demographic-settings?
 sync-cultural-and-demographic-settings?
 0
@@ -4072,20 +4072,20 @@ sync-cultural-and-demographic-settings?
 -1000
 
 CHOOSER
-3582
-125
-3954
-170
+3583
+86
+3955
+131
 cultural-model-experimentation
 cultural-model-experimentation
 "default-cultural-model-settings" "no-policy-measures" "only-social-distancing" "social-distancing-soft-lockdown" "social-distancing-hard-lockdown" "social-distancing-tracking-tracing-testing-isolating"
 1
 
 TEXTBOX
-3288
-42
-3575
-65
+3292
+50
+3579
+73
 General settings
 11
 83.0
@@ -4568,7 +4568,7 @@ SWITCH
 92
 sensitivity-analysis?
 sensitivity-analysis?
-0
+1
 1
 -1000
 
@@ -4632,13 +4632,13 @@ NIL
 1
 
 SWITCH
-3286
-86
-3568
-119
+3291
+76
+3573
+109
 manual-calibration-of-cultural-vars?
 manual-calibration-of-cultural-vars?
-0
+1
 1
 -1000
 
@@ -4651,6 +4651,27 @@ GSA_purpose
 GSA_purpose
 "Cultural Model GSA" "Cultural Model Experimentation"
 1
+
+CHOOSER
+3581
+176
+3958
+221
+load-country-hofstede-scores
+load-country-hofstede-scores
+"Belgium" "Canada" "Germany" "Great Britain" "France" "Italy" "Korea South" "Netherlands" "Norway" "Spain" "Singapore" "Sweden" "U.S.A." "World"
+6
+
+SWITCH
+3583
+137
+3961
+170
+control-for-non-cultural-country-specific-factors?
+control-for-non-cultural-country-specific-factors?
+0
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -9675,6 +9696,9 @@ NetLogo 6.1.1
     <enumeratedValueSet variable="manual-calibration-of-cultural-vars?">
       <value value="false"/>
     </enumeratedValueSet>
+    <enumeratedValueSet variable="control-for-non-cultural-country-specific-factors?">
+      <value value="true"/>
+    </enumeratedValueSet>
     <enumeratedValueSet variable="model-branch">
       <value value="&quot;cultural branch&quot;"/>
     </enumeratedValueSet>
@@ -9687,7 +9711,7 @@ NetLogo 6.1.1
       <value value="&quot;social-distancing-hard-lockdown&quot;"/>
       <value value="&quot;social-distancing-tracking-tracing-testing-isolating&quot;"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="load-country-specific-settings">
+    <enumeratedValueSet variable="load-country-hofstede-scores">
       <value value="&quot;Belgium&quot;"/>
       <value value="&quot;Canada&quot;"/>
       <value value="&quot;Germany&quot;"/>
@@ -9900,6 +9924,9 @@ NetLogo 6.1.1
     <enumeratedValueSet variable="manual-calibration-of-cultural-vars?">
       <value value="false"/>
     </enumeratedValueSet>
+    <enumeratedValueSet variable="control-for-non-cultural-country-specific-factors?">
+      <value value="true"/>
+    </enumeratedValueSet>
     <enumeratedValueSet variable="model-branch">
       <value value="&quot;cultural branch&quot;"/>
     </enumeratedValueSet>
@@ -9912,7 +9939,7 @@ NetLogo 6.1.1
       <value value="&quot;social-distancing-hard-lockdown&quot;"/>
       <value value="&quot;social-distancing-tracking-tracing-testing-isolating&quot;"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="load-country-specific-settings">
+    <enumeratedValueSet variable="load-country-hofstede-scores">
       <value value="&quot;Belgium&quot;"/>
       <value value="&quot;Canada&quot;"/>
       <value value="&quot;Germany&quot;"/>
@@ -10115,6 +10142,9 @@ NetLogo 6.1.1
     <enumeratedValueSet variable="manual-calibration-of-cultural-vars?">
       <value value="false"/>
     </enumeratedValueSet>
+    <enumeratedValueSet variable="control-for-non-cultural-country-specific-factors?">
+      <value value="true"/>
+    </enumeratedValueSet>
     <enumeratedValueSet variable="model-branch">
       <value value="&quot;cultural branch&quot;"/>
     </enumeratedValueSet>
@@ -10127,7 +10157,7 @@ NetLogo 6.1.1
       <value value="&quot;social-distancing-hard-lockdown&quot;"/>
       <value value="&quot;social-distancing-tracking-tracing-testing-isolating&quot;"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="load-country-specific-settings">
+    <enumeratedValueSet variable="load-country-hofstede-scores">
       <value value="&quot;Great Britain&quot;"/>
       <value value="&quot;France&quot;"/>
       <value value="&quot;Italy&quot;"/>
@@ -10330,6 +10360,9 @@ NetLogo 6.1.1
     <enumeratedValueSet variable="manual-calibration-of-cultural-vars?">
       <value value="false"/>
     </enumeratedValueSet>
+    <enumeratedValueSet variable="control-for-non-cultural-country-specific-factors?">
+      <value value="true"/>
+    </enumeratedValueSet>
     <enumeratedValueSet variable="model-branch">
       <value value="&quot;cultural branch&quot;"/>
     </enumeratedValueSet>
@@ -10342,7 +10375,7 @@ NetLogo 6.1.1
       <value value="&quot;social-distancing-hard-lockdown&quot;"/>
       <value value="&quot;social-distancing-tracking-tracing-testing-isolating&quot;"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="load-country-specific-settings">
+    <enumeratedValueSet variable="load-country-hofstede-scores">
       <value value="&quot;Korea South&quot;"/>
       <value value="&quot;Netherlands&quot;"/>
       <value value="&quot;Norway&quot;"/>
@@ -10545,6 +10578,9 @@ NetLogo 6.1.1
     <enumeratedValueSet variable="manual-calibration-of-cultural-vars?">
       <value value="false"/>
     </enumeratedValueSet>
+    <enumeratedValueSet variable="control-for-non-cultural-country-specific-factors?">
+      <value value="true"/>
+    </enumeratedValueSet>
     <enumeratedValueSet variable="model-branch">
       <value value="&quot;cultural branch&quot;"/>
     </enumeratedValueSet>
@@ -10557,7 +10593,7 @@ NetLogo 6.1.1
       <value value="&quot;social-distancing-hard-lockdown&quot;"/>
       <value value="&quot;social-distancing-tracking-tracing-testing-isolating&quot;"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="load-country-specific-settings">
+    <enumeratedValueSet variable="load-country-hofstede-scores">
       <value value="&quot;Spain&quot;"/>
       <value value="&quot;Singapore&quot;"/>
       <value value="&quot;Sweden&quot;"/>

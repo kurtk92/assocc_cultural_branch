@@ -330,7 +330,7 @@ to load-default-economic-parameters
 end
 
 to load-default-household-profiles
-  if sync-cultural-and-demographic-settings? = false [ 
+  if not sync-cultural-and-demographic-settings? [ 
     set household-profiles "Custom"
     load-population-profile-based-on-current-preset-profile 
   ]
@@ -360,12 +360,9 @@ to load-population-profile-based-on-current-preset-profile
   
   let country-specific-data-list []
   file-open "country-specific-data.csv"
-  
-  
   while [not file-at-end? ] [
     let csv file-read-line
     set csv word csv ";"  ; add comma for loop termination 
-    
     let mylist []  ; list of values 
     while [not empty? csv] 
     [
