@@ -10609,6 +10609,442 @@ NetLogo 6.1.1
       <value value="0.4"/>
     </enumeratedValueSet>
   </experiment>
+  <experiment name="S7-Q2-SVD-1400-1499" repetitions="1" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
+    <timeLimit steps="500"/>
+    <metric>lhs_experiment_number</metric>
+    <metric>cultural-tightness</metric>
+    <metric>uncertainty-avoidance</metric>
+    <metric>power-distance</metric>
+    <metric>masculinity-vs-femininity</metric>
+    <metric>individualism-vs-collectivism</metric>
+    <metric>indulgence-vs-restraint</metric>
+    <metric>long-vs-short-termism</metric>
+    <metric>global-confinement-measures</metric>
+    <metric>global-confinement-metric</metric>
+    <metric>count people</metric>
+    <metric>r0</metric>
+    <metric>R-naught</metric>
+    <metric>#taken-hospital-beds</metric>
+    <metric>#beds-available-for-admission</metric>
+    <metric>#dead-people</metric>
+    <metric>count people with [is-infected?]</metric>
+    <metric>count people with [epistemic-infection-status = "infected"]</metric>
+    <metric>count people with [is-believing-to-be-immune?]</metric>
+    <metric>count people with [infection-status = "healthy"]</metric>
+    <metric>count people with [infection-status = "immune"]</metric>
+    <metric>count people with [infection-status = "healthy" or infection-status = "immune"]</metric>
+    <metric>count people with [epistemic-infection-status = "immune"]</metric>
+    <metric>count people with [I-know-of-social-distancing?]</metric>
+    <metric>count people with [is-I-apply-social-distancing?]</metric>
+    <metric>count people with [I-know-of-working-from-home?]</metric>
+    <metric>#tests-performed</metric>
+    <metric>#tests-used-by-daily-testing</metric>
+    <metric>count people with [is-user-of-tracking-app?]</metric>
+    <metric>count people with [has-mobile-phone?]</metric>
+    <metric>count people with [has-mobile-phone?] / count people</metric>
+    <metric>count people-having-ever-been-recorded-as-positive-in-the-app</metric>
+    <metric>average-number-of-people-recorded-by-recording-apps</metric>
+    <metric>count people with [has-been-tested-immune?]</metric>
+    <metric>mean [number-of-people-I-infected] of people</metric>
+    <metric>standard-deviation [number-of-people-I-infected] of people</metric>
+    <metric>mean [social-distance-profile] of people</metric>
+    <metric>standard-deviation [social-distance-profile] of people</metric>
+    <metric>rnaught-exceeds-1-for-first-time?</metric>
+    <metric>consecutive-ticks-R-naught-is-&lt;-one</metric>
+    <metric>consecutive-ticks-R-naught-is-&gt;=-one</metric>
+    <metric>when-has-2%-infected-threshold-first-been-met?</metric>
+    <metric>when-has-5%-infected-threshold-first-been-met?</metric>
+    <metric>is-social-distancing-measure-active?</metric>
+    <metric>was-social-distancing-enforced?</metric>
+    <metric>is-hard-lockdown-active?</metric>
+    <metric>is-hard-lockdown-measure-activated?</metric>
+    <metric>is-soft-lockdown-active?</metric>
+    <metric>is-soft-lockdown-measure-activated?</metric>
+    <metric>is-social-distancing-testing-tracking-and-tracing-active?</metric>
+    <metric>is-quarantining-measure-active?</metric>
+    <metric>is-tracing-app-active?</metric>
+    <metric>closed-schools?</metric>
+    <metric>closed-non-essential?</metric>
+    <metric>Aware-of-social-distancing-at-start-of-simulation?</metric>
+    <metric>Aware-of-working-at-home-at-start-of-simulation?</metric>
+    <metric>Aware-of-corona-virus-at-start-of-simulation?</metric>
+    <metric>#youngs-at-start</metric>
+    <metric>#students-at-start</metric>
+    <metric>#workers-at-start</metric>
+    <metric>#retireds-at-start</metric>
+    <metric>ratio-adults-homes</metric>
+    <metric>ratio-family-homes</metric>
+    <metric>ratio-retired-couple-homes</metric>
+    <metric>ratio-multi-generational-homes</metric>
+    <metric>#essential-shop-workers</metric>
+    <metric>#university-workers</metric>
+    <metric>#workplace-workers</metric>
+    <metric>#non-essential-shop-workers</metric>
+    <metric>#hospital-workers</metric>
+    <metric>#school-workers</metric>
+    <metric>count gathering-points with [gathering-type = "hospital"]</metric>
+    <metric>count gathering-points with [gathering-type = "university"]</metric>
+    <metric>count gathering-points with [gathering-type = "home"]</metric>
+    <metric>count gathering-points with [gathering-type = "school"]</metric>
+    <metric>count gathering-points with [gathering-type = "public-leisure"]</metric>
+    <metric>count gathering-points with [gathering-type = "private-leisure"]</metric>
+    <metric>count gathering-points with [gathering-type = "essential-shop"]</metric>
+    <metric>count gathering-points with [gathering-type = "non-essential-shop"]</metric>
+    <metric>count gathering-points with [gathering-type = "workplace"]</metric>
+    <metric>count gathering-points with [gathering-type = "public-transport"]</metric>
+    <metric>count people with [is-officially-asked-to-quarantine?]</metric>
+    <metric>count should-be-isolators</metric>
+    <metric>count should-be-isolators with [current-activity != my-home and current-activity != my-hospital and current-activity != away-gathering-point]</metric>
+    <metric>ratio-quarantiners-currently-complying-to-quarantine</metric>
+    <metric>#people-infected-in-hospitals</metric>
+    <metric>#people-infected-in-workplaces</metric>
+    <metric>#people-infected-in-homes</metric>
+    <metric>#people-infected-in-public-leisure</metric>
+    <metric>#people-infected-in-private-leisure</metric>
+    <metric>#people-infected-in-schools</metric>
+    <metric>#people-infected-in-universities</metric>
+    <metric>#people-infected-in-essential-shops</metric>
+    <metric>#people-infected-in-non-essential-shops</metric>
+    <metric>#people-infected-in-pubtrans</metric>
+    <metric>#people-infected-in-shared-cars</metric>
+    <metric>#people-infected-in-queuing</metric>
+    <metric>#contacts-last-tick</metric>
+    <metric>#contacts-in-pubtrans</metric>
+    <metric>#contacts-in-shared-cars</metric>
+    <metric>#contacts-in-queuing</metric>
+    <metric>#contacts-in-hospitals</metric>
+    <metric>#contacts-in-workplaces</metric>
+    <metric>#contacts-in-homes</metric>
+    <metric>#contacts-in-public-leisure</metric>
+    <metric>#contacts-in-private-leisure</metric>
+    <metric>#contacts-in-schools</metric>
+    <metric>#contacts-in-universities</metric>
+    <metric>#contacts-in-essential-shops</metric>
+    <metric>#contacts-in-non-essential-shops</metric>
+    <metric>#cumulative-youngs-infected</metric>
+    <metric>#cumulative-students-infected</metric>
+    <metric>#cumulative-workers-infected</metric>
+    <metric>#cumulative-retireds-infected</metric>
+    <metric>#cumulative-youngs-infector</metric>
+    <metric>#cumulative-students-infector</metric>
+    <metric>#cumulative-workers-infector</metric>
+    <metric>#cumulative-retireds-infector</metric>
+    <metric>count people with [is-infected? and age = "young"]</metric>
+    <metric>count people with [is-infected? and age = "student"]</metric>
+    <metric>count people with [is-infected? and age = "worker"]</metric>
+    <metric>count people with [is-infected? and age = "retired"]</metric>
+    <metric>ratio-infected</metric>
+    <metric>ratio-infected-youngs</metric>
+    <metric>ratio-infected-students</metric>
+    <metric>ratio-infected-workers</metric>
+    <metric>ratio-infected-retireds</metric>
+    <metric>#hospitalizations-youngs-this-tick</metric>
+    <metric>#hospitalizations-students-this-tick</metric>
+    <metric>#hospitalizations-workers-this-tick</metric>
+    <metric>#hospitalizations-retired-this-tick</metric>
+    <metric>ratio-age-group-to-age-group-#infections young-age young-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections young-age student-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections young-age worker-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections young-age retired-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections student-age young-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections student-age student-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections student-age worker-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections student-age retired-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections worker-age young-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections worker-age student-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections worker-age worker-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections worker-age retired-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections retired-age young-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections retired-age student-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections retired-age worker-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections retired-age retired-age</metric>
+    <metric>age-group-to-age-group-#contacts young-age young-age</metric>
+    <metric>age-group-to-age-group-#contacts young-age student-age</metric>
+    <metric>age-group-to-age-group-#contacts young-age worker-age</metric>
+    <metric>age-group-to-age-group-#contacts young-age retired-age</metric>
+    <metric>age-group-to-age-group-#contacts student-age young-age</metric>
+    <metric>age-group-to-age-group-#contacts student-age student-age</metric>
+    <metric>age-group-to-age-group-#contacts student-age worker-age</metric>
+    <metric>age-group-to-age-group-#contacts student-age retired-age</metric>
+    <metric>age-group-to-age-group-#contacts worker-age young-age</metric>
+    <metric>age-group-to-age-group-#contacts worker-age student-age</metric>
+    <metric>age-group-to-age-group-#contacts worker-age worker-age</metric>
+    <metric>age-group-to-age-group-#contacts worker-age retired-age</metric>
+    <metric>age-group-to-age-group-#contacts retired-age young-age</metric>
+    <metric>age-group-to-age-group-#contacts retired-age student-age</metric>
+    <metric>age-group-to-age-group-#contacts retired-age worker-age</metric>
+    <metric>age-group-to-age-group-#contacts retired-age retired-age</metric>
+    <metric>mean [sleep-satisfaction-level] of people</metric>
+    <metric>mean [conformity-satisfaction-level] of people</metric>
+    <metric>mean [risk-avoidance-satisfaction-level] of people</metric>
+    <metric>mean [compliance-satisfaction-level] of people</metric>
+    <metric>mean [belonging-satisfaction-level] of people</metric>
+    <metric>mean [leisure-satisfaction-level] of people</metric>
+    <metric>mean [luxury-satisfaction-level] of people</metric>
+    <metric>mean [autonomy-satisfaction-level] of people</metric>
+    <metric>min [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
+    <metric>max [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
+    <metric>mean [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
+    <metric>standard-deviation [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
+    <enumeratedValueSet variable="static-seed?">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="sensitivity-analysis?">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="manual-calibration-of-cultural-vars?">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="GSA_purpose">
+      <value value="&quot;Cultural Model Experimentation&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="model-branch">
+      <value value="&quot;cultural branch&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="preset-scenario">
+      <value value="&quot;scenario-7-cultural-model&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="cultural-model-experimentation">
+      <value value="&quot;only-social-distancing&quot;"/>
+      <value value="&quot;social-distancing-soft-lockdown&quot;"/>
+      <value value="&quot;social-distancing-hard-lockdown&quot;"/>
+      <value value="&quot;social-distancing-tracking-tracing-testing-isolating&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="load-country-specific-settings">
+      <value value="&quot;World&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="hofstede-schwartz-mapping-mode">
+      <value value="&quot;empirical &amp; theoretical&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="contagion-factor">
+      <value value="7"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="social-distancing-density-factor">
+      <value value="0.4"/>
+    </enumeratedValueSet>
+    <steppedValueSet variable="lhs_experiment_number" first="1400" step="1" last="1499"/>
+  </experiment>
+  <experiment name="S7-Q2-SVD-800-899" repetitions="1" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
+    <timeLimit steps="500"/>
+    <metric>lhs_experiment_number</metric>
+    <metric>cultural-tightness</metric>
+    <metric>uncertainty-avoidance</metric>
+    <metric>power-distance</metric>
+    <metric>masculinity-vs-femininity</metric>
+    <metric>individualism-vs-collectivism</metric>
+    <metric>indulgence-vs-restraint</metric>
+    <metric>long-vs-short-termism</metric>
+    <metric>global-confinement-measures</metric>
+    <metric>global-confinement-metric</metric>
+    <metric>count people</metric>
+    <metric>r0</metric>
+    <metric>R-naught</metric>
+    <metric>#taken-hospital-beds</metric>
+    <metric>#beds-available-for-admission</metric>
+    <metric>#dead-people</metric>
+    <metric>count people with [is-infected?]</metric>
+    <metric>count people with [epistemic-infection-status = "infected"]</metric>
+    <metric>count people with [is-believing-to-be-immune?]</metric>
+    <metric>count people with [infection-status = "healthy"]</metric>
+    <metric>count people with [infection-status = "immune"]</metric>
+    <metric>count people with [infection-status = "healthy" or infection-status = "immune"]</metric>
+    <metric>count people with [epistemic-infection-status = "immune"]</metric>
+    <metric>count people with [I-know-of-social-distancing?]</metric>
+    <metric>count people with [is-I-apply-social-distancing?]</metric>
+    <metric>count people with [I-know-of-working-from-home?]</metric>
+    <metric>#tests-performed</metric>
+    <metric>#tests-used-by-daily-testing</metric>
+    <metric>count people with [is-user-of-tracking-app?]</metric>
+    <metric>count people with [has-mobile-phone?]</metric>
+    <metric>count people with [has-mobile-phone?] / count people</metric>
+    <metric>count people-having-ever-been-recorded-as-positive-in-the-app</metric>
+    <metric>average-number-of-people-recorded-by-recording-apps</metric>
+    <metric>count people with [has-been-tested-immune?]</metric>
+    <metric>mean [number-of-people-I-infected] of people</metric>
+    <metric>standard-deviation [number-of-people-I-infected] of people</metric>
+    <metric>mean [social-distance-profile] of people</metric>
+    <metric>standard-deviation [social-distance-profile] of people</metric>
+    <metric>rnaught-exceeds-1-for-first-time?</metric>
+    <metric>consecutive-ticks-R-naught-is-&lt;-one</metric>
+    <metric>consecutive-ticks-R-naught-is-&gt;=-one</metric>
+    <metric>when-has-2%-infected-threshold-first-been-met?</metric>
+    <metric>when-has-5%-infected-threshold-first-been-met?</metric>
+    <metric>is-social-distancing-measure-active?</metric>
+    <metric>was-social-distancing-enforced?</metric>
+    <metric>is-hard-lockdown-active?</metric>
+    <metric>is-hard-lockdown-measure-activated?</metric>
+    <metric>is-soft-lockdown-active?</metric>
+    <metric>is-soft-lockdown-measure-activated?</metric>
+    <metric>is-social-distancing-testing-tracking-and-tracing-active?</metric>
+    <metric>is-quarantining-measure-active?</metric>
+    <metric>is-tracing-app-active?</metric>
+    <metric>closed-schools?</metric>
+    <metric>closed-non-essential?</metric>
+    <metric>Aware-of-social-distancing-at-start-of-simulation?</metric>
+    <metric>Aware-of-working-at-home-at-start-of-simulation?</metric>
+    <metric>Aware-of-corona-virus-at-start-of-simulation?</metric>
+    <metric>#youngs-at-start</metric>
+    <metric>#students-at-start</metric>
+    <metric>#workers-at-start</metric>
+    <metric>#retireds-at-start</metric>
+    <metric>ratio-adults-homes</metric>
+    <metric>ratio-family-homes</metric>
+    <metric>ratio-retired-couple-homes</metric>
+    <metric>ratio-multi-generational-homes</metric>
+    <metric>#essential-shop-workers</metric>
+    <metric>#university-workers</metric>
+    <metric>#workplace-workers</metric>
+    <metric>#non-essential-shop-workers</metric>
+    <metric>#hospital-workers</metric>
+    <metric>#school-workers</metric>
+    <metric>count gathering-points with [gathering-type = "hospital"]</metric>
+    <metric>count gathering-points with [gathering-type = "university"]</metric>
+    <metric>count gathering-points with [gathering-type = "home"]</metric>
+    <metric>count gathering-points with [gathering-type = "school"]</metric>
+    <metric>count gathering-points with [gathering-type = "public-leisure"]</metric>
+    <metric>count gathering-points with [gathering-type = "private-leisure"]</metric>
+    <metric>count gathering-points with [gathering-type = "essential-shop"]</metric>
+    <metric>count gathering-points with [gathering-type = "non-essential-shop"]</metric>
+    <metric>count gathering-points with [gathering-type = "workplace"]</metric>
+    <metric>count gathering-points with [gathering-type = "public-transport"]</metric>
+    <metric>count people with [is-officially-asked-to-quarantine?]</metric>
+    <metric>count should-be-isolators</metric>
+    <metric>count should-be-isolators with [current-activity != my-home and current-activity != my-hospital and current-activity != away-gathering-point]</metric>
+    <metric>ratio-quarantiners-currently-complying-to-quarantine</metric>
+    <metric>#people-infected-in-hospitals</metric>
+    <metric>#people-infected-in-workplaces</metric>
+    <metric>#people-infected-in-homes</metric>
+    <metric>#people-infected-in-public-leisure</metric>
+    <metric>#people-infected-in-private-leisure</metric>
+    <metric>#people-infected-in-schools</metric>
+    <metric>#people-infected-in-universities</metric>
+    <metric>#people-infected-in-essential-shops</metric>
+    <metric>#people-infected-in-non-essential-shops</metric>
+    <metric>#people-infected-in-pubtrans</metric>
+    <metric>#people-infected-in-shared-cars</metric>
+    <metric>#people-infected-in-queuing</metric>
+    <metric>#contacts-last-tick</metric>
+    <metric>#contacts-in-pubtrans</metric>
+    <metric>#contacts-in-shared-cars</metric>
+    <metric>#contacts-in-queuing</metric>
+    <metric>#contacts-in-hospitals</metric>
+    <metric>#contacts-in-workplaces</metric>
+    <metric>#contacts-in-homes</metric>
+    <metric>#contacts-in-public-leisure</metric>
+    <metric>#contacts-in-private-leisure</metric>
+    <metric>#contacts-in-schools</metric>
+    <metric>#contacts-in-universities</metric>
+    <metric>#contacts-in-essential-shops</metric>
+    <metric>#contacts-in-non-essential-shops</metric>
+    <metric>#cumulative-youngs-infected</metric>
+    <metric>#cumulative-students-infected</metric>
+    <metric>#cumulative-workers-infected</metric>
+    <metric>#cumulative-retireds-infected</metric>
+    <metric>#cumulative-youngs-infector</metric>
+    <metric>#cumulative-students-infector</metric>
+    <metric>#cumulative-workers-infector</metric>
+    <metric>#cumulative-retireds-infector</metric>
+    <metric>count people with [is-infected? and age = "young"]</metric>
+    <metric>count people with [is-infected? and age = "student"]</metric>
+    <metric>count people with [is-infected? and age = "worker"]</metric>
+    <metric>count people with [is-infected? and age = "retired"]</metric>
+    <metric>ratio-infected</metric>
+    <metric>ratio-infected-youngs</metric>
+    <metric>ratio-infected-students</metric>
+    <metric>ratio-infected-workers</metric>
+    <metric>ratio-infected-retireds</metric>
+    <metric>#hospitalizations-youngs-this-tick</metric>
+    <metric>#hospitalizations-students-this-tick</metric>
+    <metric>#hospitalizations-workers-this-tick</metric>
+    <metric>#hospitalizations-retired-this-tick</metric>
+    <metric>ratio-age-group-to-age-group-#infections young-age young-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections young-age student-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections young-age worker-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections young-age retired-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections student-age young-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections student-age student-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections student-age worker-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections student-age retired-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections worker-age young-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections worker-age student-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections worker-age worker-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections worker-age retired-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections retired-age young-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections retired-age student-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections retired-age worker-age</metric>
+    <metric>ratio-age-group-to-age-group-#infections retired-age retired-age</metric>
+    <metric>age-group-to-age-group-#contacts young-age young-age</metric>
+    <metric>age-group-to-age-group-#contacts young-age student-age</metric>
+    <metric>age-group-to-age-group-#contacts young-age worker-age</metric>
+    <metric>age-group-to-age-group-#contacts young-age retired-age</metric>
+    <metric>age-group-to-age-group-#contacts student-age young-age</metric>
+    <metric>age-group-to-age-group-#contacts student-age student-age</metric>
+    <metric>age-group-to-age-group-#contacts student-age worker-age</metric>
+    <metric>age-group-to-age-group-#contacts student-age retired-age</metric>
+    <metric>age-group-to-age-group-#contacts worker-age young-age</metric>
+    <metric>age-group-to-age-group-#contacts worker-age student-age</metric>
+    <metric>age-group-to-age-group-#contacts worker-age worker-age</metric>
+    <metric>age-group-to-age-group-#contacts worker-age retired-age</metric>
+    <metric>age-group-to-age-group-#contacts retired-age young-age</metric>
+    <metric>age-group-to-age-group-#contacts retired-age student-age</metric>
+    <metric>age-group-to-age-group-#contacts retired-age worker-age</metric>
+    <metric>age-group-to-age-group-#contacts retired-age retired-age</metric>
+    <metric>mean [sleep-satisfaction-level] of people</metric>
+    <metric>mean [conformity-satisfaction-level] of people</metric>
+    <metric>mean [risk-avoidance-satisfaction-level] of people</metric>
+    <metric>mean [compliance-satisfaction-level] of people</metric>
+    <metric>mean [belonging-satisfaction-level] of people</metric>
+    <metric>mean [leisure-satisfaction-level] of people</metric>
+    <metric>mean [luxury-satisfaction-level] of people</metric>
+    <metric>mean [autonomy-satisfaction-level] of people</metric>
+    <metric>min [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
+    <metric>max [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
+    <metric>mean [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
+    <metric>standard-deviation [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
+    <enumeratedValueSet variable="static-seed?">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="sensitivity-analysis?">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="manual-calibration-of-cultural-vars?">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="GSA_purpose">
+      <value value="&quot;Cultural Model Experimentation&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="model-branch">
+      <value value="&quot;cultural branch&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="preset-scenario">
+      <value value="&quot;scenario-7-cultural-model&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="cultural-model-experimentation">
+      <value value="&quot;only-social-distancing&quot;"/>
+      <value value="&quot;social-distancing-soft-lockdown&quot;"/>
+      <value value="&quot;social-distancing-hard-lockdown&quot;"/>
+      <value value="&quot;social-distancing-tracking-tracing-testing-isolating&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="load-country-specific-settings">
+      <value value="&quot;World&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="hofstede-schwartz-mapping-mode">
+      <value value="&quot;empirical &amp; theoretical&quot;"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="contagion-factor">
+      <value value="7"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="social-distancing-density-factor">
+      <value value="0.4"/>
+    </enumeratedValueSet>
+    <steppedValueSet variable="lhs_experiment_number" first="800" step="1" last="899"/>
+  </experiment>
 </experiments>
 @#$#@#$#@
 @#$#@#$#@
