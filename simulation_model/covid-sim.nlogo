@@ -10609,11 +10609,19 @@ NetLogo 6.1.1
       <value value="0.4"/>
     </enumeratedValueSet>
   </experiment>
+<<<<<<< HEAD
   <experiment name="S7-FINAL-EXPERIMENT-Q2-BASELINE-97.5-PDI" repetitions="10" runMetricsEveryStep="true">
+=======
+  <experiment name="S7-Q2-SVD-1400-1499" repetitions="1" runMetricsEveryStep="true">
+>>>>>>> 8c9dbe92a8b7619669d635670c391b9fd3484928
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
     <timeLimit steps="500"/>
+<<<<<<< HEAD
+=======
+    <metric>lhs_experiment_number</metric>
+>>>>>>> 8c9dbe92a8b7619669d635670c391b9fd3484928
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -10789,6 +10797,7 @@ NetLogo 6.1.1
     <metric>mean [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>standard-deviation [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <enumeratedValueSet variable="static-seed?">
+<<<<<<< HEAD
       <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="sensitivity-analysis?">
@@ -13606,10 +13615,22 @@ NetLogo 6.1.1
     </enumeratedValueSet>
     <enumeratedValueSet variable="sensitivity-analysis?">
       <value value="false"/>
+=======
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="sensitivity-analysis?">
+      <value value="true"/>
+>>>>>>> 8c9dbe92a8b7619669d635670c391b9fd3484928
     </enumeratedValueSet>
     <enumeratedValueSet variable="manual-calibration-of-cultural-vars?">
       <value value="true"/>
     </enumeratedValueSet>
+<<<<<<< HEAD
+=======
+    <enumeratedValueSet variable="GSA_purpose">
+      <value value="&quot;Cultural Model Experimentation&quot;"/>
+    </enumeratedValueSet>
+>>>>>>> 8c9dbe92a8b7619669d635670c391b9fd3484928
     <enumeratedValueSet variable="model-branch">
       <value value="&quot;cultural branch&quot;"/>
     </enumeratedValueSet>
@@ -13634,6 +13655,7 @@ NetLogo 6.1.1
     <enumeratedValueSet variable="social-distancing-density-factor">
       <value value="0.4"/>
     </enumeratedValueSet>
+<<<<<<< HEAD
     <enumeratedValueSet variable="power-distance">
       <value value="50"/>
     </enumeratedValueSet>
@@ -13658,10 +13680,19 @@ NetLogo 6.1.1
     </enumeratedValueSet>
   </experiment>
   <experiment name="S7-FINAL-EXPERIMENT-Q2-BASELINE-50-CLT" repetitions="10" runMetricsEveryStep="true">
+=======
+    <steppedValueSet variable="lhs_experiment_number" first="1400" step="1" last="1499"/>
+  </experiment>
+  <experiment name="S7-Q2-SVD-800-899" repetitions="1" runMetricsEveryStep="true">
+>>>>>>> 8c9dbe92a8b7619669d635670c391b9fd3484928
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
     <timeLimit steps="500"/>
+<<<<<<< HEAD
+=======
+    <metric>lhs_experiment_number</metric>
+>>>>>>> 8c9dbe92a8b7619669d635670c391b9fd3484928
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -13837,14 +13868,27 @@ NetLogo 6.1.1
     <metric>mean [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>standard-deviation [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <enumeratedValueSet variable="static-seed?">
+<<<<<<< HEAD
       <value value="false"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="sensitivity-analysis?">
       <value value="false"/>
+=======
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="sensitivity-analysis?">
+      <value value="true"/>
+>>>>>>> 8c9dbe92a8b7619669d635670c391b9fd3484928
     </enumeratedValueSet>
     <enumeratedValueSet variable="manual-calibration-of-cultural-vars?">
       <value value="true"/>
     </enumeratedValueSet>
+<<<<<<< HEAD
+=======
+    <enumeratedValueSet variable="GSA_purpose">
+      <value value="&quot;Cultural Model Experimentation&quot;"/>
+    </enumeratedValueSet>
+>>>>>>> 8c9dbe92a8b7619669d635670c391b9fd3484928
     <enumeratedValueSet variable="model-branch">
       <value value="&quot;cultural branch&quot;"/>
     </enumeratedValueSet>
@@ -13869,6 +13913,7 @@ NetLogo 6.1.1
     <enumeratedValueSet variable="social-distancing-density-factor">
       <value value="0.4"/>
     </enumeratedValueSet>
+<<<<<<< HEAD
     <enumeratedValueSet variable="power-distance">
       <value value="50"/>
     </enumeratedValueSet>
@@ -13891,6 +13936,9 @@ NetLogo 6.1.1
       <value value="2.5"/>
       <value value="97.5"/>
     </enumeratedValueSet>
+=======
+    <steppedValueSet variable="lhs_experiment_number" first="800" step="1" last="899"/>
+>>>>>>> 8c9dbe92a8b7619669d635670c391b9fd3484928
   </experiment>
 </experiments>
 @#$#@#$#@
