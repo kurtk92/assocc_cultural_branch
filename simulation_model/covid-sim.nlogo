@@ -5248,7 +5248,7 @@ NetLogo 6.1.1
       <value value="50"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="cultural-tightness">
-      <value value="50"/>
+      <value value="100"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>
