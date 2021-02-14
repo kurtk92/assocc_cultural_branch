@@ -96,15 +96,13 @@ to load-scenario-7-cultural-model
     if cultural-model-experimentation = "social-distancing-soft-lockdown" [
       set ratio-omniscious-infected-that-trigger-social-distancing-measure 0.02
       set global-confinement-measures "soft-lockdown-5-2"
-      set is-working-from-home-recommended? true
     ]
     
     if cultural-model-experimentation = "social-distancing-hard-lockdown" [
       set ratio-omniscious-infected-that-trigger-social-distancing-measure 0.02
       set global-confinement-measures "lockdown-10-5"
-      set ratio-omniscious-infected-that-trigger-school-closing-measure 0.05
+      set ratio-omniscious-infected-that-trigger-school-closing-measure 0.02
       set ratio-omniscious-infected-that-trigger-non-essential-closing-measure 0.05
-      set is-working-from-home-recommended? true
     ]
     
     if cultural-model-experimentation = "social-distancing-tracking-tracing-testing-isolating" [
