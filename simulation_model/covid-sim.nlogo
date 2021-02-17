@@ -5020,11 +5020,11 @@ NetLogo 6.1.1
 @#$#@#$#@
 @#$#@#$#@
 <experiments>
-  <experiment name="S7-Rev-No-Cluster" repetitions="3" runMetricsEveryStep="true">
+  <experiment name="S7-Rev-No-Cluster-SH" repetitions="7" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="500"/>
+    <timeLimit steps="1000"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -5253,11 +5253,11 @@ NetLogo 6.1.1
       <value value="50"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-Rev-Cluster2-82.90-27.70-59.20-37.60-58.20-33.30" repetitions="3" runMetricsEveryStep="true">
+  <experiment name="S7-Rev-Cluster2-SH-82.90-27.70-59.20-37.60-58.20-33.30" repetitions="7" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="500"/>
+    <timeLimit steps="1000"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -5486,11 +5486,11 @@ NetLogo 6.1.1
       <value value="50"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-Rev-Cluster3-67.39-34.70-43.17-83.57-40.17-39.48" repetitions="3" runMetricsEveryStep="true">
+  <experiment name="S7-Rev-Cluster3-SH-67.39-34.70-43.17-83.57-40.17-39.48" repetitions="7" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="500"/>
+    <timeLimit steps="1000"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -5719,11 +5719,11 @@ NetLogo 6.1.1
       <value value="50"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-Rev-Cluster4-69.83-18.33-58.33-73.50-15.83-87.83" repetitions="3" runMetricsEveryStep="true">
+  <experiment name="S7-Rev-Cluster4-SH-69.83-18.33-58.33-73.50-15.83-87.83" repetitions="7" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="500"/>
+    <timeLimit steps="1000"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -5952,11 +5952,11 @@ NetLogo 6.1.1
       <value value="50"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-Rev-Cluster5-46.93-58.73-54.27-73.87-75.27-39.00" repetitions="3" runMetricsEveryStep="true">
+  <experiment name="S7-Rev-Cluster5-SH-46.93-58.73-54.27-73.87-75.27-39.00" repetitions="7" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="500"/>
+    <timeLimit steps="1000"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -6185,11 +6185,11 @@ NetLogo 6.1.1
       <value value="50"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-Rev-Cluster1-Base-32.09-77.82-39.64-43.45-38.09-67.64" repetitions="3" runMetricsEveryStep="true">
+  <experiment name="S7-Rev-Cluster1-SH-32.09-77.82-39.64-43.45-38.09-67.64" repetitions="7" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="500"/>
+    <timeLimit steps="1000"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -6418,11 +6418,11 @@ NetLogo 6.1.1
       <value value="50"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-Rev-Cluster2-Base-82.90-27.70-59.20-37.60-58.20-33.30" repetitions="3" runMetricsEveryStep="true">
+  <experiment name="S7-Rev-Cluster2-Base-82.90-27.70-59.20-37.60-58.20-33.30" repetitions="9" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="500"/>
+    <timeLimit steps="1000"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -6648,11 +6648,11 @@ NetLogo 6.1.1
       <value value="50"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-Rev-Cluster3-Base-67.39-34.70-43.17-83.57-40.17-39.48" repetitions="3" runMetricsEveryStep="true">
+  <experiment name="S7-Rev-Cluster3-Base-67.39-34.70-43.17-83.57-40.17-39.48" repetitions="9" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="500"/>
+    <timeLimit steps="1000"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -6881,11 +6881,11 @@ NetLogo 6.1.1
       <value value="50"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-Rev-Cluster4-Base-69.83-18.33-58.33-73.50-15.83-87.83" repetitions="3" runMetricsEveryStep="true">
+  <experiment name="S7-Rev-Cluster4-Base-69.83-18.33-58.33-73.50-15.83-87.83" repetitions="9" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="500"/>
+    <timeLimit steps="1000"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -7114,11 +7114,11 @@ NetLogo 6.1.1
       <value value="50"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-Rev-Cluster5-Base-46.93-58.73-54.27-73.87-75.27-39.00" repetitions="3" runMetricsEveryStep="true">
+  <experiment name="S7-Rev-Cluster5-Base-46.93-58.73-54.27-73.87-75.27-39.00" repetitions="9" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="500"/>
+    <timeLimit steps="1000"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -7347,11 +7347,11 @@ NetLogo 6.1.1
       <value value="50"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-Rev-Cluster1-Base-32.09-77.82-39.64-43.45-38.09-67.64" repetitions="3" runMetricsEveryStep="true">
+  <experiment name="S7-Rev-Cluster1-Base-32.09-77.82-39.64-43.45-38.09-67.64" repetitions="9" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="500"/>
+    <timeLimit steps="1000"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -7580,11 +7580,11 @@ NetLogo 6.1.1
       <value value="50"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-Rev-No-Cluster-Base" repetitions="3" runMetricsEveryStep="true">
+  <experiment name="S7-Rev-No-Cluster-Base" repetitions="9" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="500"/>
+    <timeLimit steps="1000"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
