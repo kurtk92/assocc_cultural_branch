@@ -120,7 +120,7 @@ to perform-trades-between-gathering-points
   set virtual-total-amount-of-goods-available-in-workplaces-converted-to-capital virtual-total-amount-of-goods-available-in-workplaces * unit-price-of-goods
   
   ;non-essential-shop
-  let total-capital-available-in-non-essential-shops-to-buy-goods 0
+  let total-capital-available-in-non-essential-shops-to-buy-goods 100
   ask non-essential-shops
   [
     let capital-available-to-buy-goods amount-of-capital - max-amount-of-capital-to-retain
@@ -144,11 +144,12 @@ to perform-trades-between-gathering-points
       
       set amount-of-capital amount-of-capital - amount-charged
       set current-profit current-profit - amount-charged
-      set stock-of-goods stock-of-goods + stock-bought
+      set stock-of-goods max (list (stock-of-goods + stock-bought) 500)
       set actual-amount-of-stocks-bought actual-amount-of-stocks-bought + stock-bought
     ]
   ]
   
+     
   ;workplace
   let total-capital-spent-by-all-shops actual-amount-of-stocks-bought * unit-price-of-goods
   set total-amount-of-transaction-for-this-tick total-amount-of-transaction-for-this-tick + total-capital-spent-by-all-shops
