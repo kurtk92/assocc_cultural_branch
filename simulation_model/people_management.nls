@@ -101,22 +101,24 @@ people-own [
   importance-given-to-power-value
   importance-given-to-achievement-value
   
-  ;IMPORTANCE of BELONGING needs
-  ;*** NOTE: the belonging only contains 1x subneed (more subneeds might be added to this category at a later stage) ***
-  importance-weight-belonging-subneed
+
 
   ;IMPORTANCE of SURVIVAL needs
   importance-weight-food-safety
   importance-weight-financial-survival
   importance-weight-health
   importance-weight-sleep
-  importance-weight-conformity
 
+  ;IMPORTANCE of BELONGING needs
+  ;*** NOTE: the belonging only contains 1x subneed (more subneeds might be added to this category at a later stage) ***
+  importance-weight-belonging-subneed
+  
   ;IMPORTANCE of SAFETY needs
   importance-weight-financial-stability
   importance-weight-risk-avoidance
   importance-weight-compliance
-
+  importance-weight-conformity
+  
   ;IMPORTANCE of ESTEEM needs
   importance-weight-luxury
   importance-weight-leisure

@@ -1,5 +1,21 @@
 ;; This file contains some random utility functions that don't have a direct impact on the model, but that might be useful in many places, such as debug functions and extra mathematical functions
 
+to-report TRANSFORM-LIST! [#list #sep]
+  if  #list = 0 [report #list]
+  if not empty? #list [report reduce [[x y] -> (word x #sep y)] #list]
+  report #list 
+end
+
+to-report easier-read-table [ table_ ]
+  if table_ = 0 [error (sentence "ill defined " self)]
+  let out []
+  foreach table:to-list table_ [ i -> 
+    set out lput ( reduce sentence i ) out
+  ]
+  report out
+end
+
+
 to-report weighted-mean [values weights]
   report (sum (map [ [v w] -> v * w] values weights)) / sum weights
 end

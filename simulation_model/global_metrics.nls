@@ -1,5 +1,10 @@
 globals
-[
+[#bad-behaving-agents 
+  needs-weight-table 
+  value-weight-table 
+  value-mean-std-table 
+  needs-mean-std-table 
+  
   #infected-times-ticks
   #delivered-supply-proposed-this-tick
   when-has-2%-infected-threshold-first-been-met?
@@ -65,6 +70,9 @@ globals
   contamination-network-table
   #infected-people-per-ticks
   #hospitalized-per-tick
+  values-weight-table
+  
+  location-violating-quarantining-list 
   
   R-naught-list
   consecutive-ticks-R-naught-is-<-one
@@ -109,15 +117,60 @@ to update-metrics
   if ratio-infected > 0.05 and when-has-5%-infected-threshold-first-been-met? = "never"
   [set when-has-5%-infected-threshold-first-been-met? ticks]
   
-  update-number-of-consecutive-days-R-naught-is-higher-or-lower-than-one  
+  update-number-of-consecutive-days-R-naught-is-higher-or-lower-than-one 
+  update-location-quarantining-violaters-list 
 
 end
 
-to reset-metrics
-  set #admissions-last-tick 0 
-  set  #delivered-supply-proposed-this-tick 0
-  set #contacts-last-tick 0
+to-report bad-behaving?
+  report is-violating-quarantine? and not is-believing-to-be-immune?
   
+end
+to update-location-quarantining-violaters-list
+  ask people with [is-violating-quarantine? and not is-believing-to-be-immune?] [
+    set #bad-behaving-agents  #bad-behaving-agents  + 1
+    foreach (list 
+      who 
+      ticks 
+      [gathering-type] of current-activity 
+      current-motivation 
+      is-I-apply-social-distancing? 
+      age 
+      importance-weight-health
+      importance-weight-food-safety
+      importance-weight-financial-survival
+      importance-weight-financial-stability
+      importance-weight-sleep
+      importance-weight-conformity
+      importance-weight-risk-avoidance
+      importance-weight-compliance
+      importance-weight-belonging-subneed
+      importance-weight-leisure
+      importance-weight-luxury
+      importance-weight-autonomy
+      health-satisfaction-level 
+      food-safety-satisfaction-level 
+      financial-survival-satisfaction-level
+      financial-stability-satisfaction-level
+      sleep-satisfaction-level
+      conformity-satisfaction-level
+      risk-avoidance-satisfaction-level
+      compliance-satisfaction-level
+      belonging-satisfaction-level
+      leisure-satisfaction-level
+      luxury-satisfaction-level 
+      autonomy-satisfaction-level) [x -> set location-violating-quarantining-list lput x  location-violating-quarantining-list]
+]
+ update-tables 
+end
+
+to reset-metrics
+  set contamination-network-table (list)
+  set location-violating-quarantining-list (list)
+  set #bad-behaving-agents 0
+  set #admissions-last-tick 0 
+  set #delivered-supply-proposed-this-tick 0
+  set #contacts-last-tick 0
   set #contacts-in-pubtrans 0
   set #contacts-in-shared-cars 0
   set #contacts-in-queuing 0
@@ -136,6 +189,7 @@ to reset-metrics
   set #hospitalizations-students-this-tick 0
   set #hospitalizations-workers-this-tick 0
   set #hospitalizations-retired-this-tick 0
+ 
   
   ;;reset age-group-to-age-group-#contacts-table
   foreach all-ages [ [x] -> foreach all-ages [ [y] -> table:put age-group-to-age-group-#contacts-table (list x y) 0]]
@@ -191,15 +245,209 @@ to-report ratio-age-group-to-age-group-#infections [infector-age infected-age]
 end
 
 to add-to-contagion-tree [infector infectee context]
-  if contamination-network-table = 0 [set contamination-network-table table:make] 
+  if contamination-network-table = 0 [set contamination-network-table (list)]
+  let loc 0
+  let my-age 0
   let key infector
-  ifelse infector != nobody 
-  [set key [who] of infector]
-  [set key "nobody"]
+  let mot 0
+  let numb 0
+  let badass 0
+  let sd 0
+  let sl-health 0
+  let sl-food-safe 0 
+  let sl-finan-surv 0  
+  let sl-finan-stab  0 
+  let sl-sleep 0
+  let sl-conf 0 
+  let sl-risk-avoid 0 
+  let sl-compl 0  
+  let sl-belong 0 
+  let sl-leis 0 
+  let sl-lux 0 
+  let sl-aut 0
+  let iw-health 0
+  let iw-food-safe 0 
+  let iw-finan-surv 0  
+  let iw-finan-stab  0 
+  let iw-sleep 0
+  let iw-conf 0 
+  let iw-risk-avoid 0 
+  let iw-compl 0  
+  let iw-belong 0 
+  let iw-leis 0 
+  let iw-lux 0 
+  let iw-aut 0 
   
-  if not table:has-key? contamination-network-table key [table:put contamination-network-table key (list)]
-  table:put contamination-network-table key lput (list [who] of infectee ticks context)  table:get contamination-network-table key
+  ifelse infector != nobody 
+  [set key [who] of infector
+    set mot [current-motivation] of infectee
+    set loc [gathering-type] of [current-activity] of infector
+    set my-age [age] of infector 
+    set badass [bad-behaving?] of infector
+    set sd [is-I-apply-social-distancing?] of infector
+    set numb [current-gatherers] of [current-activity] of infectee
+    set iw-health [importance-weight-health] of infector
+    set iw-food-safe [importance-weight-food-safety] of infector
+    set iw-finan-surv  [importance-weight-financial-survival] of infector
+    set iw-finan-stab  [importance-weight-financial-stability] of infector
+    set iw-sleep  [importance-weight-sleep] of infector
+    set iw-conf  [importance-weight-conformity] of infector
+    set iw-risk-avoid  [importance-weight-risk-avoidance] of infector
+    set iw-compl  [importance-weight-compliance] of infector
+    set iw-belong  [importance-weight-belonging-subneed] of infector
+    set iw-leis [ importance-weight-leisure] of infector
+    set iw-lux  [importance-weight-luxury] of infector
+    set iw-aut  [importance-weight-autonomy] of infector
+    set sl-health  [health-satisfaction-level] of infector 
+    set sl-food-safe [food-safety-satisfaction-level] of infector 
+    set sl-finan-surv  [financial-survival-satisfaction-level] of infector
+    set sl-finan-stab [financial-stability-satisfaction-level] of infector
+    set sl-sleep [sleep-satisfaction-level] of infector
+    set sl-conf [conformity-satisfaction-level] of infector
+    set sl-risk-avoid [risk-avoidance-satisfaction-level] of infector
+    set sl-compl [compliance-satisfaction-level] of infector
+    set sl-belong [belonging-satisfaction-level] of infector
+    set sl-leis [leisure-satisfaction-level] of infector
+    set sl-lux [luxury-satisfaction-level] of infector 
+    set sl-aut [autonomy-satisfaction-level] of infector
+  ]
+  [set key "nobody"
+  set loc "setup"
+  set my-age "setup"]
+  
+  foreach (list 
+    key 
+    ticks 
+    sd
+    mot 
+    loc 
+    my-age 
+    [age] of infectee 
+    badass 
+    numb
+    iw-health 
+    iw-food-safe 
+    iw-finan-surv  
+    iw-finan-stab  
+    iw-sleep  
+    iw-conf 
+    iw-risk-avoid 
+    iw-compl 
+    iw-belong  
+    iw-leis
+    iw-lux  
+    iw-aut 
+    sl-health  
+    sl-food-safe
+    sl-finan-surv  
+    sl-finan-stab 
+    sl-sleep 
+    sl-conf 
+    sl-risk-avoid 
+    sl-compl 
+    sl-belong 
+    sl-leis 
+    sl-lux 
+    sl-aut  ) [ x -> set contamination-network-table lput x contamination-network-table]
 end
+
+
+to update-tables 
+  set needs-weight-table (list)
+  set value-weight-table (list)
+  set value-mean-std-table (list)
+  set needs-mean-std-table (list)   
+  
+  if ticks = 1 [
+    
+    ask people [
+      let key_needs [who] of self
+      foreach (list
+        key_needs 
+        precision importance-weight-belonging-subneed 5
+        precision importance-weight-financial-stability 5
+        precision importance-weight-risk-avoidance 5
+        precision importance-weight-compliance 5
+        precision importance-weight-conformity 5
+        precision importance-weight-luxury 5
+        precision importance-weight-leisure 5
+         precision importance-weight-food-safety 5
+        precision importance-weight-financial-survival 5
+        precision importance-weight-sleep 5
+        precision importance-weight-health 5
+      ) [ x -> set needs-weight-table  lput x needs-weight-table ]
+     
+      let key_value [who] of self
+      foreach (list 
+        key_value
+        precision importance-given-to-hedonism-value 5
+        precision importance-given-to-stimulation-value 5 
+        precision importance-given-to-self-direction-value 5 
+        precision importance-given-to-universalism-value 5
+        precision importance-given-to-benevolence-value 5
+        precision importance-given-to-conformity-tradition-value 5
+        precision importance-given-to-security-value 5
+        precision importance-given-to-power-value 5
+        precision importance-given-to-achievement-value 5) [x -> set value-weight-table lput x value-weight-table ]
+    ]
+    
+            
+    foreach  (list 
+      "mean"
+      precision mean [importance-weight-belonging-subneed] of people 5 
+      precision mean [importance-weight-financial-stability] of people 5
+      precision mean [importance-weight-risk-avoidance] of people 5
+      precision mean [importance-weight-compliance] of people 5
+      precision mean [importance-weight-conformity] of people 5
+      precision mean [importance-weight-luxury] of people 5
+      precision mean [importance-weight-leisure] of people 5
+      precision mean [importance-weight-autonomy] of people 5
+      precision mean [importance-weight-food-safety] of people 5
+      precision mean [importance-weight-financial-survival] of people 5
+      precision mean [importance-weight-sleep] of people 5
+      precision mean [importance-weight-health] of people 5
+      "std-dev"
+      precision standard-deviation [importance-weight-belonging-subneed] of people 5
+      precision standard-deviation [importance-weight-financial-stability] of people 5
+      precision standard-deviation [importance-weight-risk-avoidance] of people 5
+      precision standard-deviation [importance-weight-compliance] of people 5
+      precision standard-deviation [importance-weight-conformity] of people 5
+      precision standard-deviation [importance-weight-luxury] of people 5
+      precision standard-deviation [importance-weight-leisure] of people 5
+      precision standard-deviation [importance-weight-autonomy] of people 5
+      precision standard-deviation [importance-weight-food-safety] of people 5
+      precision standard-deviation [importance-weight-financial-survival] of people 5
+      precision standard-deviation [importance-weight-sleep] of people 5
+    precision standard-deviation [importance-weight-health] of people 5) [x -> set needs-mean-std-table lput x needs-mean-std-table]
+   
+
+    foreach (list 
+      "mean"
+      precision mean [importance-given-to-hedonism-value] of people 5 
+      precision mean [importance-given-to-stimulation-value] of people 5 
+      precision mean [importance-given-to-self-direction-value] of people 5 
+      precision mean [importance-given-to-universalism-value] of people 5 
+      precision mean [importance-given-to-benevolence-value] of people 5 
+      precision mean [importance-given-to-conformity-tradition-value] of people 5 
+      precision mean [importance-given-to-security-value] of people 5 
+      precision mean [importance-given-to-power-value] of people 5 
+      precision mean [importance-given-to-achievement-value] of people 5 
+      "std-dev"
+      precision standard-deviation [importance-given-to-hedonism-value] of people 5 
+      precision standard-deviation [importance-given-to-stimulation-value] of people 5 
+      precision standard-deviation [importance-given-to-self-direction-value] of people 5 
+      precision standard-deviation [importance-given-to-universalism-value] of people 5 
+      precision standard-deviation [importance-given-to-benevolence-value] of people 5 
+      precision standard-deviation [importance-given-to-conformity-tradition-value] of people 5 
+      precision standard-deviation [importance-given-to-security-value] of people 5 
+      precision standard-deviation [importance-given-to-power-value] of people 5 
+      precision standard-deviation [importance-given-to-achievement-value] of people 5 ) [ x -> set value-mean-std-table lput x value-mean-std-table]
+
+  ]
+  
+  
+end
+
 
 
 to increment-contagion-metrics-from [context infected infector]
@@ -320,6 +568,8 @@ end
 to-report population-size
 if ticks = 0 or ticks = 1 [report count people]
 end
+
+
 
 
 

@@ -56,6 +56,7 @@ to setup
   set when-has-2%-infected-threshold-first-been-met? "never"
   set when-has-5%-infected-threshold-first-been-met? "never"
   set start-tick-of-global-quarantine "never"
+  set location-violating-quarantining-list (list)
   
   load-nations-cultural-profile-settings
   load-scenario-specific-parameter-settings 
