@@ -136,32 +136,33 @@ to update-location-quarantining-violaters-list
       current-motivation 
       is-I-apply-social-distancing? 
       age 
-      importance-weight-health
-      importance-weight-food-safety
-      importance-weight-financial-survival
-      importance-weight-financial-stability
-      importance-weight-sleep
-      importance-weight-conformity
-      importance-weight-risk-avoidance
-      importance-weight-compliance
-      importance-weight-belonging-subneed
-      importance-weight-leisure
-      importance-weight-luxury
-      importance-weight-autonomy
-      health-satisfaction-level 
-      food-safety-satisfaction-level 
-      financial-survival-satisfaction-level
-      financial-stability-satisfaction-level
-      sleep-satisfaction-level
-      conformity-satisfaction-level
-      risk-avoidance-satisfaction-level
-      compliance-satisfaction-level
-      belonging-satisfaction-level
-      leisure-satisfaction-level
-      luxury-satisfaction-level 
-      autonomy-satisfaction-level) [x -> set location-violating-quarantining-list lput x  location-violating-quarantining-list]
+      precision importance-weight-health 4
+      precision importance-weight-food-safety 4
+      precision importance-weight-financial-survival 4
+      precision importance-weight-financial-stability 4
+      precision importance-weight-sleep 4
+      precision importance-weight-conformity 4
+      precision importance-weight-risk-avoidance 4
+      precision importance-weight-compliance 4
+      precision importance-weight-belonging-subneed 4
+      precision importance-weight-leisure 4
+      precision importance-weight-luxury 4
+      precision importance-weight-autonomy 4
+      precision health-satisfaction-level 4
+      precision food-safety-satisfaction-level 4
+      precision financial-survival-satisfaction-level 4
+      precision financial-stability-satisfaction-level 4
+      precision sleep-satisfaction-level 4
+      precision conformity-satisfaction-level 4
+      precision risk-avoidance-satisfaction-level 4
+      precision compliance-satisfaction-level 4
+      precision belonging-satisfaction-level 4
+      precision leisure-satisfaction-level 4
+      precision luxury-satisfaction-level 4
+      precision autonomy-satisfaction-level 4 
+      TRANSFORM-LIST! activity-statisfaction-tracker ",") [x -> set location-violating-quarantining-list lput x  location-violating-quarantining-list]
 ]
- update-tables 
+ 
 end
 
 to reset-metrics
@@ -276,7 +277,8 @@ to add-to-contagion-tree [infector infectee context]
   let iw-belong 0 
   let iw-leis 0 
   let iw-lux 0 
-  let iw-aut 0 
+  let iw-aut 0
+  let asr 0 
   
   ifelse infector != nobody 
   [set key [who] of infector
@@ -285,31 +287,32 @@ to add-to-contagion-tree [infector infectee context]
     set my-age [age] of infector 
     set badass [bad-behaving?] of infector
     set sd [is-I-apply-social-distancing?] of infector
-    set numb [current-gatherers] of [current-activity] of infectee
-    set iw-health [importance-weight-health] of infector
-    set iw-food-safe [importance-weight-food-safety] of infector
-    set iw-finan-surv  [importance-weight-financial-survival] of infector
-    set iw-finan-stab  [importance-weight-financial-stability] of infector
-    set iw-sleep  [importance-weight-sleep] of infector
-    set iw-conf  [importance-weight-conformity] of infector
-    set iw-risk-avoid  [importance-weight-risk-avoidance] of infector
-    set iw-compl  [importance-weight-compliance] of infector
-    set iw-belong  [importance-weight-belonging-subneed] of infector
-    set iw-leis [ importance-weight-leisure] of infector
-    set iw-lux  [importance-weight-luxury] of infector
-    set iw-aut  [importance-weight-autonomy] of infector
-    set sl-health  [health-satisfaction-level] of infector 
-    set sl-food-safe [food-safety-satisfaction-level] of infector 
-    set sl-finan-surv  [financial-survival-satisfaction-level] of infector
-    set sl-finan-stab [financial-stability-satisfaction-level] of infector
-    set sl-sleep [sleep-satisfaction-level] of infector
-    set sl-conf [conformity-satisfaction-level] of infector
-    set sl-risk-avoid [risk-avoidance-satisfaction-level] of infector
-    set sl-compl [compliance-satisfaction-level] of infector
-    set sl-belong [belonging-satisfaction-level] of infector
-    set sl-leis [leisure-satisfaction-level] of infector
-    set sl-lux [luxury-satisfaction-level] of infector 
-    set sl-aut [autonomy-satisfaction-level] of infector
+    set numb count [current-gatherers] of [current-activity] of infectee
+    set iw-health precision  [importance-weight-health] of infector 4
+    set iw-food-safe precision [importance-weight-food-safety] of infector 4
+    set iw-finan-surv precision [importance-weight-financial-survival] of infector 4
+    set iw-finan-stab precision [importance-weight-financial-stability] of infector 4
+    set iw-sleep precision [importance-weight-sleep] of infector 4
+    set iw-conf precision [importance-weight-conformity] of infector 4
+    set iw-risk-avoid precision [importance-weight-risk-avoidance] of infector 4
+    set iw-compl precision [importance-weight-compliance] of infector 4
+    set iw-belong precision [importance-weight-belonging-subneed] of infector 4
+    set iw-leis precision [importance-weight-leisure] of infector 4
+    set iw-lux precision [importance-weight-luxury] of infector 4
+    set iw-aut precision [importance-weight-autonomy] of infector 4
+    set sl-health precision [health-satisfaction-level] of infector 4 
+    set sl-food-safe precision [food-safety-satisfaction-level] of infector 4 
+    set sl-finan-surv  precision [financial-survival-satisfaction-level] of infector 4
+    set sl-finan-stab precision [financial-stability-satisfaction-level] of infector 4
+    set sl-sleep precision [sleep-satisfaction-level] of infector 4
+    set sl-conf precision [conformity-satisfaction-level] of infector 4
+    set sl-risk-avoid precision [risk-avoidance-satisfaction-level] of infector 4
+    set sl-compl precision [compliance-satisfaction-level] of infector 4
+    set sl-belong precision [belonging-satisfaction-level] of infector 4
+    set sl-leis precision [leisure-satisfaction-level] of infector 4
+    set sl-lux precision [luxury-satisfaction-level] of infector 4 
+    set sl-aut precision [autonomy-satisfaction-level] of infector 4
+    set asr TRANSFORM-LIST! [activity-statisfaction-tracker] of infector ","
   ]
   [set key "nobody"
   set loc "setup"
@@ -348,7 +351,8 @@ to add-to-contagion-tree [infector infectee context]
     sl-belong 
     sl-leis 
     sl-lux 
-    sl-aut  ) [ x -> set contamination-network-table lput x contamination-network-table]
+    sl-aut
+    asr  ) [ x -> set contamination-network-table lput x contamination-network-table]
 end
 
 
@@ -358,28 +362,27 @@ to update-tables
   set value-mean-std-table (list)
   set needs-mean-std-table (list)   
   
-  if ticks = 1 [
-    
+     
     ask people [
       let key_needs [who] of self
       foreach (list
-        key_needs 
-        precision importance-weight-belonging-subneed 5
-        precision importance-weight-financial-stability 5
-        precision importance-weight-risk-avoidance 5
-        precision importance-weight-compliance 5
-        precision importance-weight-conformity 5
-        precision importance-weight-luxury 5
-        precision importance-weight-leisure 5
-         precision importance-weight-food-safety 5
-        precision importance-weight-financial-survival 5
-        precision importance-weight-sleep 5
-        precision importance-weight-health 5
+       ; key_needs 
+      precision importance-weight-belonging-subneed 5
+      precision importance-weight-financial-stability 5
+      precision importance-weight-risk-avoidance 5
+      precision importance-weight-compliance 5
+      precision importance-weight-conformity 5
+      precision importance-weight-luxury 5
+      precision importance-weight-leisure 5
+      precision importance-weight-food-safety 5
+      precision importance-weight-financial-survival 5
+      precision importance-weight-sleep 5
+      precision importance-weight-health 5
       ) [ x -> set needs-weight-table  lput x needs-weight-table ]
      
       let key_value [who] of self
       foreach (list 
-        key_value
+        ;key_value
         precision importance-given-to-hedonism-value 5
         precision importance-given-to-stimulation-value 5 
         precision importance-given-to-self-direction-value 5 
@@ -418,7 +421,7 @@ to update-tables
       precision standard-deviation [importance-weight-food-safety] of people 5
       precision standard-deviation [importance-weight-financial-survival] of people 5
       precision standard-deviation [importance-weight-sleep] of people 5
-    precision standard-deviation [importance-weight-health] of people 5) [x -> set needs-mean-std-table lput x needs-mean-std-table]
+      precision standard-deviation [importance-weight-health] of people 5) [x -> set needs-mean-std-table lput x needs-mean-std-table]
    
 
     foreach (list 
@@ -443,7 +446,7 @@ to update-tables
       precision standard-deviation [importance-given-to-power-value] of people 5 
       precision standard-deviation [importance-given-to-achievement-value] of people 5 ) [ x -> set value-mean-std-table lput x value-mean-std-table]
 
-  ]
+ 
   
   
 end

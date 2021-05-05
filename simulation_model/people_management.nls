@@ -22,6 +22,7 @@ people-own [
   list-motorized-locations
   do-I-possess-a-car?
   current-transport-mode
+  activity-statisfaction-tracker
   
   ;;transportation model
   my-means-of-transportation-I-currently-use

@@ -613,6 +613,23 @@ to debug-my-preferred-available-activity-descriptor
   ]
 end
 
+to-report log-my-expected-statisfaction [ad]
+  report (list
+    precision (SDE-food-safety ad * importance-weight-food-safety * 1000) 4
+    precision (SDE-financial-survival ad * importance-weight-financial-survival * 1000) 4
+    precision (SDE-sleep ad * importance-weight-sleep * 1000) 4
+    precision (SDE-health ad * importance-weight-health * 1000) 4
+    precision (SDE-conformity ad * importance-weight-conformity * 1000) 4
+    precision (SDE-compliance ad * importance-weight-compliance * 1000) 4
+    precision (SDE-risk-avoidance ad * importance-weight-risk-avoidance * 1000) 4
+    precision (SDE-financial-stability ad * importance-weight-financial-stability * 1000) 4
+    precision (SDE-belonging ad * importance-weight-belonging-subneed * 1000) 4
+    precision (SDE-autonomy ad * importance-weight-autonomy * 1000) 4
+    precision (SDE-luxury ad * importance-weight-luxury * 1000) 4
+    precision (SDE-leisure ad * importance-weight-leisure * 1000) 4 
+    precision (global-prevalence-of ad * 1000) 4)
+end
+
 ;;; SDE and SDA SURVIVAL NEEDS
 
 to-report SDE-health [ad]

@@ -422,7 +422,7 @@ to load-default-culture-values-and-needs-parameter-settings
   set min-value-std-dev 5
   set max-value-std-dev 15
   
-  set cultural-tightness-function-modifier 0.1
+  set cultural-tightness-function-modifier 0
   set activate-intra-cultural-variation? true
   set influence-of-age-on-value-system 5
   ; Needs

@@ -87,6 +87,7 @@ to select-activity
   if (migration? and random-float 1 < probability-going-abroad) [
     set c-a (list away-gathering-point travelling-motive false)
   ]
+  set activity-statisfaction-tracker log-my-expected-statisfaction c-a  
   
   let loc location-of c-a
   select-activity-wtf? loc

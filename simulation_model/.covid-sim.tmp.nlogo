@@ -31,7 +31,7 @@ to go
   increment-time
   apply-active-measures
   update-metrics
-
+  ;update-tables
   if OVERRIDE-ECONOMY?[ FIX-ECONOMY]
   ; Tick goes at the end of the go procedure for better plot updating
   tick
@@ -354,7 +354,7 @@ CHOOSER
 global-confinement-measures
 global-confinement-measures
 "none" "social-distancing" "total-lockdown" "lockdown-10-5" "soft-lockdown-5-2" "social-distancing-testing-tracking-and-tracing"
-1
+4
 
 PLOT
 10
@@ -2415,7 +2415,7 @@ uncertainty-avoidance
 uncertainty-avoidance
 0
 100
-50.0
+37.6
 1
 1
 NIL
@@ -2430,7 +2430,7 @@ individualism-vs-collectivism
 individualism-vs-collectivism
 0
 100
-50.0
+27.7
 1
 1
 NIL
@@ -2445,7 +2445,7 @@ power-distance
 power-distance
 0
 100
-50.0
+82.9
 1
 1
 NIL
@@ -2460,7 +2460,7 @@ indulgence-vs-restraint
 indulgence-vs-restraint
 0
 100
-50.0
+33.3
 1
 1
 NIL
@@ -2475,7 +2475,7 @@ masculinity-vs-femininity
 masculinity-vs-femininity
 0
 100
-50.0
+59.2
 1
 1
 NIL
@@ -2490,7 +2490,7 @@ long-vs-short-termism
 long-vs-short-termism
 0
 100
-50.0
+58.2
 1
 1
 NIL
@@ -3373,7 +3373,7 @@ SWITCH
 1619
 is-infected-and-their-families-requested-to-stay-at-home?
 is-infected-and-their-families-requested-to-stay-at-home?
-0
+1
 1
 -1000
 
@@ -4015,7 +4015,7 @@ cultural-tightness-function-modifier
 cultural-tightness-function-modifier
 0
 0.2
-0.1
+0.0
 1
 1
 NIL
@@ -4059,7 +4059,7 @@ CHOOSER
 hofstede-schwartz-mapping-mode
 hofstede-schwartz-mapping-mode
 "theoretical" "empirical" "empirical & theoretical" "old settings"
-2
+0
 
 SWITCH
 3584
@@ -4080,7 +4080,7 @@ CHOOSER
 cultural-model-experimentation
 cultural-model-experimentation
 "default-cultural-model-settings" "no-policy-measures" "only-social-distancing" "social-distancing-soft-lockdown" "social-distancing-hard-lockdown" "social-distancing-tracking-tracing-testing-isolating"
-2
+3
 
 TEXTBOX
 3292
@@ -4661,7 +4661,7 @@ CHOOSER
 load-country-hofstede-scores
 load-country-hofstede-scores
 "Belgium" "Canada" "Germany" "Great Britain" "France" "Italy" "Korea South" "Netherlands" "Norway" "Spain" "Singapore" "Sweden" "U.S.A." "World" "NoCluster" "ClusterA" "ClusterB" "ClusterC" "ClusterD" "ClusterE"
-14
+16
 
 SWITCH
 3583
@@ -5203,6 +5203,10 @@ NetLogo 6.1.1
     <metric>#bad-behaving-agents</metric>
     <metric>TRANSFORM-LIST! contamination-network-table ","</metric>
     <metric>TRANSFORM-LIST! location-violating-quarantining-list ","</metric>
+    <metric>TRANSFORM-LIST! needs-weight-table ","</metric>
+    <metric>TRANSFORM-LIST! value-weight-table  ","</metric>
+    <metric>TRANSFORM-LIST! value-mean-std-table  ","</metric>
+    <metric>TRANSFORM-LIST! needs-mean-std-table ","</metric>
     <enumeratedValueSet variable="static-seed?">
       <value value="false"/>
     </enumeratedValueSet>
@@ -5227,7 +5231,7 @@ NetLogo 6.1.1
       <value value="&quot;World&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="hofstede-schwartz-mapping-mode">
-      <value value="&quot;empirical &amp; theoretical&quot;"/>
+      <value value="&quot;theoretical&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="contagion-factor">
       <value value="9"/>
@@ -5442,7 +5446,7 @@ NetLogo 6.1.1
       <value value="&quot;World&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="hofstede-schwartz-mapping-mode">
-      <value value="&quot;empirical &amp; theoretical&quot;"/>
+      <value value="&quot;theoretical&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="contagion-factor">
       <value value="9"/>
@@ -5657,7 +5661,7 @@ NetLogo 6.1.1
       <value value="&quot;World&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="hofstede-schwartz-mapping-mode">
-      <value value="&quot;empirical &amp; theoretical&quot;"/>
+      <value value="&quot;theoretical&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="contagion-factor">
       <value value="9"/>
@@ -5872,7 +5876,7 @@ NetLogo 6.1.1
       <value value="&quot;World&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="hofstede-schwartz-mapping-mode">
-      <value value="&quot;empirical &amp; theoretical&quot;"/>
+      <value value="&quot;theoretical&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="contagion-factor">
       <value value="9"/>
@@ -6087,7 +6091,7 @@ NetLogo 6.1.1
       <value value="&quot;World&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="hofstede-schwartz-mapping-mode">
-      <value value="&quot;empirical &amp; theoretical&quot;"/>
+      <value value="&quot;theoretical&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="contagion-factor">
       <value value="9"/>
@@ -6302,7 +6306,7 @@ NetLogo 6.1.1
       <value value="&quot;World&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="hofstede-schwartz-mapping-mode">
-      <value value="&quot;empirical &amp; theoretical&quot;"/>
+      <value value="&quot;theoretical&quot;"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="contagion-factor">
       <value value="9"/>
