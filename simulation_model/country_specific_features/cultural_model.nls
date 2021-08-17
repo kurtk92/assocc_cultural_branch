@@ -334,7 +334,6 @@ to set-values-based-on-culture
   
   let max_value_level 100
   let Vfinal []
-  
   ;loop through agent value system and transform the 'extreme' means (i.e. those that are smaller than 10 or higher than 90)
   foreach Vraw [
     vmean -> if vmean <= 10 or vmean >= 90 [
@@ -345,7 +344,6 @@ to set-values-based-on-culture
     ;add vmeans to Vfinal
     set Vfinal lput vmean Vfinal
   ]
-  
   ask people [
     set importance-given-to-hedonism-value clamp 0.01 100 (random-normal (item 0 Vfinal) value-std-dev)
     set importance-given-to-stimulation-value clamp 0.01 100 (random-normal (item 1 Vfinal) value-std-dev)

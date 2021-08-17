@@ -122,6 +122,14 @@ to update-metrics
 
 end
 
+to-report friends-list
+  let k (list)
+  ask people [ set k fput count my-friends k]
+  report k
+end
+  
+  
+
 to-report bad-behaving?
   report is-violating-quarantine? and not is-believing-to-be-immune?
   
