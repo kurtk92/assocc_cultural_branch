@@ -74,6 +74,7 @@ to-report is-soft-lockdown-active?
       if rnaught-exceeds-1-for-first-time? = false and ratio-infected < ratio-omniscious-infected-that-trigger-social-distancing-measure [    
         set is-soft-lockdown-measure-activated? false
         set was-social-distancing-enforced? false
+        set current-stage 1
         set is-working-from-home-recommended? false
         set is-infected-and-their-families-requested-to-stay-at-home? false
         set keep-retired-quarantined-forever-if-global-quarantine-is-fired-global-measure? false
@@ -83,6 +84,7 @@ to-report is-soft-lockdown-active?
       if rnaught-exceeds-1-for-first-time? = false and ratio-infected > ratio-omniscious-infected-that-trigger-social-distancing-measure [    
         set is-working-from-home-recommended? true
         set was-social-distancing-enforced? true
+        set current-stage 3
         set is-infected-and-their-families-requested-to-stay-at-home? true
         set keep-retired-quarantined-forever-if-global-quarantine-is-fired-global-measure? true
         set is-soft-lockdown-measure-activated? true
@@ -99,6 +101,7 @@ to-report is-soft-lockdown-active?
           set keep-retired-quarantined-forever-if-global-quarantine-is-fired-global-measure? true
           set is-working-from-home-recommended? true
           set was-social-distancing-enforced? true
+          set current-stage 3
           set ratio-self-quarantining-when-symptomatic 1
           set is-infected-and-their-families-requested-to-stay-at-home? true
           report true 
@@ -111,6 +114,7 @@ to-report is-soft-lockdown-active?
           set ratio-self-quarantining-when-symptomatic 0
           set is-infected-and-their-families-requested-to-stay-at-home? false
           set was-social-distancing-enforced? false
+          set current-stage 2
           set keep-retired-quarantined-forever-if-global-quarantine-is-fired-global-measure? false
           report false
         ]

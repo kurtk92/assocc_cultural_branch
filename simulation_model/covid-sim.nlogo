@@ -3373,7 +3373,7 @@ SWITCH
 1619
 is-infected-and-their-families-requested-to-stay-at-home?
 is-infected-and-their-families-requested-to-stay-at-home?
-1
+0
 1
 -1000
 
@@ -3692,7 +3692,7 @@ SWITCH
 1746
 keep-retired-quarantined-forever-if-global-quarantine-is-fired-global-measure?
 keep-retired-quarantined-forever-if-global-quarantine-is-fired-global-measure?
-1
+0
 1
 -1000
 
@@ -3807,7 +3807,7 @@ SWITCH
 1178
 is-working-from-home-recommended?
 is-working-from-home-recommended?
-1
+0
 1
 -1000
 
@@ -5228,6 +5228,7 @@ NetLogo 6.1.1
     <metric>mean [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>standard-deviation [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>#bad-behaving-agents</metric>
+    <metric>current-stage</metric>
     <metric>TRANSFORM-LIST! contamination-network-table ","</metric>
     <metric>TRANSFORM-LIST! location-violating-quarantining-list ","</metric>
     <metric>TRANSFORM-LIST! needs-weight-table ","</metric>
@@ -5445,8 +5446,13 @@ NetLogo 6.1.1
     <metric>mean [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>standard-deviation [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>#bad-behaving-agents</metric>
+    <metric>current-stage</metric>
     <metric>TRANSFORM-LIST! contamination-network-table ","</metric>
     <metric>TRANSFORM-LIST! location-violating-quarantining-list ","</metric>
+    <metric>TRANSFORM-LIST! needs-weight-table ","</metric>
+    <metric>TRANSFORM-LIST! value-weight-table  ","</metric>
+    <metric>TRANSFORM-LIST! value-mean-std-table  ","</metric>
+    <metric>TRANSFORM-LIST! needs-mean-std-table ","</metric>
     <enumeratedValueSet variable="static-seed?">
       <value value="false"/>
     </enumeratedValueSet>
@@ -5658,8 +5664,13 @@ NetLogo 6.1.1
     <metric>mean [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>standard-deviation [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>#bad-behaving-agents</metric>
+    <metric>current-stage</metric>
     <metric>TRANSFORM-LIST! contamination-network-table ","</metric>
     <metric>TRANSFORM-LIST! location-violating-quarantining-list ","</metric>
+    <metric>TRANSFORM-LIST! needs-weight-table ","</metric>
+    <metric>TRANSFORM-LIST! value-weight-table  ","</metric>
+    <metric>TRANSFORM-LIST! value-mean-std-table  ","</metric>
+    <metric>TRANSFORM-LIST! needs-mean-std-table ","</metric>
     <enumeratedValueSet variable="static-seed?">
       <value value="false"/>
     </enumeratedValueSet>
@@ -5871,8 +5882,13 @@ NetLogo 6.1.1
     <metric>mean [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>standard-deviation [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>#bad-behaving-agents</metric>
+    <metric>current-stage</metric>
     <metric>TRANSFORM-LIST! contamination-network-table ","</metric>
     <metric>TRANSFORM-LIST! location-violating-quarantining-list ","</metric>
+    <metric>TRANSFORM-LIST! needs-weight-table ","</metric>
+    <metric>TRANSFORM-LIST! value-weight-table  ","</metric>
+    <metric>TRANSFORM-LIST! value-mean-std-table  ","</metric>
+    <metric>TRANSFORM-LIST! needs-mean-std-table ","</metric>
     <enumeratedValueSet variable="static-seed?">
       <value value="false"/>
     </enumeratedValueSet>
@@ -6084,8 +6100,13 @@ NetLogo 6.1.1
     <metric>mean [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>standard-deviation [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>#bad-behaving-agents</metric>
+    <metric>current-stage</metric>
     <metric>TRANSFORM-LIST! contamination-network-table ","</metric>
     <metric>TRANSFORM-LIST! location-violating-quarantining-list ","</metric>
+    <metric>TRANSFORM-LIST! needs-weight-table ","</metric>
+    <metric>TRANSFORM-LIST! value-weight-table  ","</metric>
+    <metric>TRANSFORM-LIST! value-mean-std-table  ","</metric>
+    <metric>TRANSFORM-LIST! needs-mean-std-table ","</metric>
     <enumeratedValueSet variable="static-seed?">
       <value value="false"/>
     </enumeratedValueSet>
@@ -6297,8 +6318,13 @@ NetLogo 6.1.1
     <metric>mean [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>standard-deviation [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>#bad-behaving-agents</metric>
+    <metric>current-stage</metric>
     <metric>TRANSFORM-LIST! contamination-network-table ","</metric>
     <metric>TRANSFORM-LIST! location-violating-quarantining-list ","</metric>
+    <metric>TRANSFORM-LIST! needs-weight-table ","</metric>
+    <metric>TRANSFORM-LIST! value-weight-table  ","</metric>
+    <metric>TRANSFORM-LIST! value-mean-std-table  ","</metric>
+    <metric>TRANSFORM-LIST! needs-mean-std-table ","</metric>
     <enumeratedValueSet variable="static-seed?">
       <value value="false"/>
     </enumeratedValueSet>

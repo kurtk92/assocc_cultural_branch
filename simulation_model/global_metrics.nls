@@ -77,6 +77,7 @@ globals
   R-naught-list
   consecutive-ticks-R-naught-is-<-one
   consecutive-ticks-R-naught-is->=-one
+  current-stage
   
 ]
 
@@ -128,7 +129,7 @@ to-report friends-list
   report k
 end
   
-  
+
 
 to-report bad-behaving?
   report is-violating-quarantine? and not is-believing-to-be-immune?
@@ -361,7 +362,8 @@ to add-to-contagion-tree [infector infectee context]
     sl-lux 
     sl-aut
     asr
-    is-soft-lockdown-active?  ) [ x -> set contamination-network-table lput x contamination-network-table]
+    current-stage ) [ x -> set contamination-network-table lput x contamination-network-table]
+  print contamination-network-table
 end
 
 
