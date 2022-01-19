@@ -1520,7 +1520,7 @@ SWITCH
 80
 static-seed?
 static-seed?
-0
+1
 1
 -1000
 
@@ -3427,7 +3427,7 @@ ratio-self-quarantining-when-symptomatic
 ratio-self-quarantining-when-symptomatic
 0
 1
-0.0
+1.0
 0.01
 1
 NIL
@@ -5265,7 +5265,7 @@ NetLogo 6.1.1
       <value value="&quot;NoCluster&quot;"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-REV4-ClusA" repetitions="28" runMetricsEveryStep="true">
+  <experiment name="S7-REB3-ClusA" repetitions="28" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
