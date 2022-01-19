@@ -5048,11 +5048,11 @@ NetLogo 6.1.1
 @#$#@#$#@
 @#$#@#$#@
 <experiments>
-  <experiment name="S7-REV4-ClusNo" repetitions="28" runMetricsEveryStep="true">
+  <experiment name="S7-REB3-ClusNo" repetitions="28" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="1000"/>
+    <timeLimit steps="1500"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -5265,11 +5265,11 @@ NetLogo 6.1.1
       <value value="&quot;NoCluster&quot;"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-REV4-ClusA" repetitions="28" runMetricsEveryStep="true">
+  <experiment name="S7-REB3-ClusA" repetitions="28" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="1000"/>
+    <timeLimit steps="1500"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -5478,11 +5478,11 @@ NetLogo 6.1.1
       <value value="&quot;ClusterA&quot;"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-REV4-ClusB" repetitions="28" runMetricsEveryStep="true">
+  <experiment name="S7-REB3-ClusB" repetitions="28" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="1000"/>
+    <timeLimit steps="1500"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -5691,11 +5691,11 @@ NetLogo 6.1.1
       <value value="&quot;ClusterB&quot;"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-REV4-ClusC" repetitions="28" runMetricsEveryStep="true">
+  <experiment name="S7-REB3-ClusC" repetitions="28" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="1000"/>
+    <timeLimit steps="1500"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -5904,11 +5904,11 @@ NetLogo 6.1.1
       <value value="&quot;ClusterC&quot;"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-REV4-ClusD" repetitions="28" runMetricsEveryStep="true">
+  <experiment name="S7-REB3-ClusD" repetitions="28" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="1000"/>
+    <timeLimit steps="1500"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -6117,11 +6117,11 @@ NetLogo 6.1.1
       <value value="&quot;ClusterD&quot;"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-REV4-ClusE" repetitions="28" runMetricsEveryStep="true">
+  <experiment name="S7-REB3-ClusE" repetitions="28" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="1000"/>
+    <timeLimit steps="1500"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
