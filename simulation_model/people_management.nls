@@ -92,6 +92,7 @@ people-own [
   ;;;;;;;; CULTURAL MODEL VARIABLES (by Amineh, Bart, Kurt) ;;;;;;;;
 
   ;SCHWARTZ VALUE VARIABLES
+  value_system
   importance-given-to-hedonism-value
   importance-given-to-stimulation-value
   importance-given-to-self-direction-value

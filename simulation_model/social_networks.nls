@@ -46,8 +46,14 @@ to setup-social-networks-value-similarity
   ifelse count people > 20 [
     ask people [
       ; Its up to n so this does not throw an error if there are a lot of leisure places and not enough agents to become friends with
-      create-my-friends-links-with turtle-set up-to-n-of peer-group-friend-links (sort-on [value-euclidean-distance myself] possible-friends)
-    ]
+      let favourable-friends-list (sort-on [value-euclidean-distance myself] possible-friends)
+      repeat peer-group-friend-links [
+          if length favourable-friends-list > 0 [
+            create-my-friends-link-with item 0 favourable-friends-list
+            set favourable-friends-list but-first favourable-friends-list
+          ]
+        ]
+      ]
     repeat round (percentage-of-agents-with-random-link * count people) [
       ask one-of people with [any? possible-friends] [
         let new-friend one-of possible-friends

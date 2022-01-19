@@ -70,20 +70,20 @@ end
 
 to-report is-soft-lockdown-active?
   if global-confinement-measures = "soft-lockdown-5-2" [
-    if global-confinement-metric = "infection-ratio" [
-      if (ratio-infected > 0.05 or (is-soft-lockdown-measure-activated? and ratio-infected > 0.02 )) [
-        set is-soft-lockdown-measure-activated? true
-        report true
-      ]
-      if ratio-infected <= 0.02 [
-        		set is-soft-lockdown-measure-activated? false
-        		report false
-      ]
-    ]
     if global-confinement-metric = "RNaught" [
+      if rnaught-exceeds-1-for-first-time? = false and ratio-infected < ratio-omniscious-infected-that-trigger-social-distancing-measure [    
+        set is-soft-lockdown-measure-activated? false
+        set was-social-distancing-enforced? false
+        set is-working-from-home-recommended? false
+        set is-infected-and-their-families-requested-to-stay-at-home? false
+        set keep-retired-quarantined-forever-if-global-quarantine-is-fired-global-measure? false
+        report false
+      ]
       ;use infection rate based trigger for initial trigger of lockdown measures (i.e. only if rnaught has not exceeded 1 yet!)
-      if rnaught-exceeds-1-for-first-time? = false and ratio-infected > infection-rate-based-trigger [    
+      if rnaught-exceeds-1-for-first-time? = false and ratio-infected > ratio-omniscious-infected-that-trigger-social-distancing-measure [    
         set is-working-from-home-recommended? true
+        set was-social-distancing-enforced? true
+        set is-infected-and-their-families-requested-to-stay-at-home? true
         set keep-retired-quarantined-forever-if-global-quarantine-is-fired-global-measure? true
         set is-soft-lockdown-measure-activated? true
         report true
@@ -94,25 +94,33 @@ to-report is-soft-lockdown-active?
         ;after initial trigger, use the rnaught metric to activate or lift measures
         ;condition 1: activate measure when rnaught exceeds 1 for a specified amount of time
         ;condition 2: keep measure activated as long as rnaught does not drop below one for a specified amount of time
-        if (consecutive-ticks-R-naught-is->=-one >= #consecutive-ticks-Rnaught-exceeds-1-to-trigger-implementing-measures) or 
-        (consecutive-ticks-R-naught-is-<-one < #consecutive-ticks-Rnaught-is-below-1-to-trigger-lifting-measures) [
+        if ratio-infected > infection-rate-based-trigger [
           set is-soft-lockdown-measure-activated? true
           set keep-retired-quarantined-forever-if-global-quarantine-is-fired-global-measure? true
           set is-working-from-home-recommended? true
+          set was-social-distancing-enforced? true
+          set ratio-self-quarantining-when-symptomatic 1
+          set is-infected-and-their-families-requested-to-stay-at-home? true
           report true 
         ]
         ;if rnaught stays below 1 for a sufficient amount of time, then measure is lifted
         ;keep measure lifted as long as rnaught does not exceed 1 for a specified amount of time
-        if (consecutive-ticks-R-naught-is-<-one >= #consecutive-ticks-Rnaught-is-below-1-to-trigger-lifting-measures) [
+        if (consecutive-ticks-R-naught-is-<-one >= #consecutive-ticks-Rnaught-is-below-1-to-trigger-lifting-measures) and ratio-infected < 0.04   [
           set is-soft-lockdown-measure-activated? false
           set is-working-from-home-recommended? false
+          set ratio-self-quarantining-when-symptomatic 0
+          set is-infected-and-their-families-requested-to-stay-at-home? false
+          set was-social-distancing-enforced? false
           set keep-retired-quarantined-forever-if-global-quarantine-is-fired-global-measure? false
           report false
         ]
       ]
+      ifelse is-soft-lockdown-measure-activated? 
+      [report true]
+      [report false]
     ]
   ]
-  report false
+  
 end
 
 to-report is-social-distancing-testing-tracking-and-tracing-active?
@@ -161,18 +169,6 @@ to-report #still-available-tests
 end
 
 to-report is-social-distancing-measure-active?
-  if global-confinement-metric = "infection-ratio" and global-confinement-measures != "none" [
-    if ratio-omniscious-infected-that-trigger-social-distancing-measure < ratio-infected [
-      set was-social-distancing-enforced? true
-      report true 
-    ]
-  ]
-  if global-confinement-metric = "RNaught" and global-confinement-measures != "none" [
-    if rnaught-exceeds-1-for-first-time? = false and ratio-infected > infection-rate-based-trigger or rnaught-exceeds-1-for-first-time? [
-      set was-social-distancing-enforced? true 
-      report true
-    ] 
-  ]
   if was-social-distancing-enforced? [
     report true 
   ]
@@ -213,6 +209,7 @@ to disable-all-measures
   set global-confinement-measures "none"
   set closed-universities? false
   set closed-workplaces? false
+  set was-social-distancing-enforced? false
   ; Disable testing
   set ratio-population-randomly-tested-daily 0
   set ratio-population-daily-immunity-testing 0

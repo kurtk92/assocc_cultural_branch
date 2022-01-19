@@ -122,7 +122,7 @@ to recalibrate-value-system-according-to-age-group-of-agent
       POW_coeff
       ACH_coeff)
     
-    let value_system (list
+    set value_system (list
       importance-given-to-hedonism-value
       importance-given-to-stimulation-value
       importance-given-to-self-direction-value
@@ -364,7 +364,7 @@ end
 to increase-logical-consistency-of-agent-value-systems
   ask people [
     
-    let value_system (list
+    set value_system (list
       importance-given-to-hedonism-value
       importance-given-to-stimulation-value
       importance-given-to-self-direction-value
@@ -445,6 +445,18 @@ to increase-logical-consistency-of-agent-value-systems
       if member? POW_index changed_value_indices [set importance-given-to-power-value item POW_index value_system_copy]
       if member? ACH_index changed_value_indices [set importance-given-to-achievement-value item ACH_index value_system_copy]
     ]
+
+  
+      set value_system (list
+      importance-given-to-hedonism-value
+      importance-given-to-stimulation-value
+      importance-given-to-self-direction-value
+      importance-given-to-universalism-value
+      importance-given-to-benevolence-value
+      importance-given-to-conformity-tradition-value
+      importance-given-to-security-value
+      importance-given-to-power-value
+      importance-given-to-achievement-value)
   ]
 end
 

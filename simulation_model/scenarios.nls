@@ -42,7 +42,7 @@ to load-scenario-7-cultural-model
     ]
     
     if cultural-model-experimentation = "social-distancing-soft-lockdown" [
-      set global-confinement-metric "RNaught"
+      set ratio-omniscious-infected-that-trigger-social-distancing-measure 0.02
       set global-confinement-measures "soft-lockdown-5-2"
     ]
     
@@ -169,7 +169,7 @@ to load-default-intervention-measures-settings
   set ratio-young-with-phones 1
   set ratio-retired-with-phones 1
   set is-tracking-app-testing-immediately-recursive? true
-  set infection-rate-based-trigger 0.02
+  set infection-rate-based-trigger 0.08
   ;by default: disable all measures aimed at minimizing the spread & mortality of the coronavirus
   disable-all-measures
 end
@@ -277,7 +277,7 @@ to load-default-disease-model
   set factor-reduction-probability-transmission-young 0.69
   ;specify default RNaught settings
   set #consecutive-ticks-Rnaught-exceeds-1-to-trigger-implementing-measures 12
-  set #consecutive-ticks-Rnaught-is-below-1-to-trigger-lifting-measures 12
+  set #consecutive-ticks-Rnaught-is-below-1-to-trigger-lifting-measures 0
   set #days-agent-R-naught-remains-in-population-Rnaught-after-moment-of-recovery 7
 end
 

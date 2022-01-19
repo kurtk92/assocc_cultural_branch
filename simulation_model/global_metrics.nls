@@ -360,7 +360,8 @@ to add-to-contagion-tree [infector infectee context]
     sl-leis 
     sl-lux 
     sl-aut
-    asr  ) [ x -> set contamination-network-table lput x contamination-network-table]
+    asr
+    is-soft-lockdown-active?  ) [ x -> set contamination-network-table lput x contamination-network-table]
 end
 
 

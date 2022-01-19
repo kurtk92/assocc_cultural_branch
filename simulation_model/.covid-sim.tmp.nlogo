@@ -5052,7 +5052,7 @@ NetLogo 6.1.1
     <setup>setup</setup>
     <go>go</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="1000"/>
+    <timeLimit steps="1500"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
