@@ -133,8 +133,16 @@ end
 
 to-report bad-behaving?
   report is-violating-quarantine? and not is-believing-to-be-immune?
-  
 end
+
+to-report #agents-breaking-soft-lockdown
+  let k 0
+  if current-stage = 3 [
+    set k count people with [not [is-essential-shop?] of current-activity and not [is-hospital?] of current-activity and not [ is-home?] of current-activity] 
+  ]
+ report k 
+end
+
 to update-location-quarantining-violaters-list
   ask people with [is-violating-quarantine? and not is-believing-to-be-immune?] [
     set #bad-behaving-agents  #bad-behaving-agents  + 1
@@ -169,7 +177,8 @@ to update-location-quarantining-violaters-list
       precision leisure-satisfaction-level 4
       precision luxury-satisfaction-level 4
       precision autonomy-satisfaction-level 4 
-      TRANSFORM-LIST! activity-statisfaction-tracker ",") [x -> set location-violating-quarantining-list lput x  location-violating-quarantining-list]
+      TRANSFORM-LIST! activity-statisfaction-tracker ","
+      current-stage) [x -> set location-violating-quarantining-list lput x  location-violating-quarantining-list]
 ]
  
 end

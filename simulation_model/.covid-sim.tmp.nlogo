@@ -2415,7 +2415,7 @@ uncertainty-avoidance
 uncertainty-avoidance
 0
 100
-73.87
+43.45
 1
 1
 NIL
@@ -2430,7 +2430,7 @@ individualism-vs-collectivism
 individualism-vs-collectivism
 0
 100
-58.73
+77.82
 1
 1
 NIL
@@ -2445,7 +2445,7 @@ power-distance
 power-distance
 0
 100
-46.93
+32.09
 1
 1
 NIL
@@ -2460,7 +2460,7 @@ indulgence-vs-restraint
 indulgence-vs-restraint
 0
 100
-39.0
+67.64
 1
 1
 NIL
@@ -2475,7 +2475,7 @@ masculinity-vs-femininity
 masculinity-vs-femininity
 0
 100
-54.27
+39.64
 1
 1
 NIL
@@ -2490,7 +2490,7 @@ long-vs-short-termism
 long-vs-short-termism
 0
 100
-75.27
+38.09
 1
 1
 NIL
@@ -3373,7 +3373,7 @@ SWITCH
 1619
 is-infected-and-their-families-requested-to-stay-at-home?
 is-infected-and-their-families-requested-to-stay-at-home?
-0
+1
 1
 -1000
 
@@ -3427,7 +3427,7 @@ ratio-self-quarantining-when-symptomatic
 ratio-self-quarantining-when-symptomatic
 0
 1
-1.0
+0.0
 0.01
 1
 NIL
@@ -3692,7 +3692,7 @@ SWITCH
 1746
 keep-retired-quarantined-forever-if-global-quarantine-is-fired-global-measure?
 keep-retired-quarantined-forever-if-global-quarantine-is-fired-global-measure?
-0
+1
 1
 -1000
 
@@ -3807,7 +3807,7 @@ SWITCH
 1178
 is-working-from-home-recommended?
 is-working-from-home-recommended?
-0
+1
 1
 -1000
 
@@ -4404,7 +4404,7 @@ contagion-factor
 contagion-factor
 1
 20
-5.5
+5.0
 0.05
 1
 NIL
@@ -4661,7 +4661,7 @@ CHOOSER
 load-country-hofstede-scores
 load-country-hofstede-scores
 "Belgium" "Canada" "Germany" "Great Britain" "France" "Italy" "Korea South" "Netherlands" "Norway" "Spain" "Singapore" "Sweden" "U.S.A." "World" "NoCluster" "ClusterA" "ClusterB" "ClusterC" "ClusterD" "ClusterE"
-19
+15
 
 SWITCH
 3583
@@ -4700,6 +4700,17 @@ S1 -> S3 = 4% \nS3 -> S2 = 4% \nS2 -> S3 = 8%\nContagiousness-fct = 5\nSocial-di
 11
 0.0
 0
+
+MONITOR
+1622
+648
+1816
+693
+NIL
+#agents-breaking-soft-lockdown
+17
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -5048,11 +5059,12 @@ NetLogo 6.1.1
 @#$#@#$#@
 @#$#@#$#@
 <experiments>
-  <experiment name="S7-REB3-ClusNo" repetitions="28" runMetricsEveryStep="true">
+  <experiment name="S7-REB3-ClusNo" repetitions="150" runMetricsEveryStep="true">
     <setup>setup</setup>
-    <go>go</go>
+    <go>go
+if not any? people with [is-contagious?]
+[stop]</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="1500"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -5229,6 +5241,7 @@ NetLogo 6.1.1
     <metric>standard-deviation [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>#bad-behaving-agents</metric>
     <metric>current-stage</metric>
+    <metric>#agents-breaking-soft-lockdown</metric>
     <metric>TRANSFORM-LIST! contamination-network-table ","</metric>
     <metric>TRANSFORM-LIST! location-violating-quarantining-list ","</metric>
     <metric>TRANSFORM-LIST! needs-weight-table ","</metric>
@@ -5266,11 +5279,12 @@ NetLogo 6.1.1
       <value value="&quot;NoCluster&quot;"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-REB3-ClusA" repetitions="28" runMetricsEveryStep="true">
+  <experiment name="S7-REB3-ClusA" repetitions="150" runMetricsEveryStep="true">
     <setup>setup</setup>
-    <go>go</go>
+    <go>go
+if not any? people with [is-contagious?]
+[stop]</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="1500"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -5446,8 +5460,14 @@ NetLogo 6.1.1
     <metric>mean [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>standard-deviation [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>#bad-behaving-agents</metric>
+    <metric>current-stage</metric>
+    <metric>#agents-breaking-soft-lockdown</metric>
     <metric>TRANSFORM-LIST! contamination-network-table ","</metric>
     <metric>TRANSFORM-LIST! location-violating-quarantining-list ","</metric>
+    <metric>TRANSFORM-LIST! needs-weight-table ","</metric>
+    <metric>TRANSFORM-LIST! value-weight-table  ","</metric>
+    <metric>TRANSFORM-LIST! value-mean-std-table  ","</metric>
+    <metric>TRANSFORM-LIST! needs-mean-std-table ","</metric>
     <enumeratedValueSet variable="static-seed?">
       <value value="false"/>
     </enumeratedValueSet>
@@ -5479,11 +5499,12 @@ NetLogo 6.1.1
       <value value="&quot;ClusterA&quot;"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-REB3-ClusB" repetitions="28" runMetricsEveryStep="true">
+  <experiment name="S7-REB3-ClusB" repetitions="150" runMetricsEveryStep="true">
     <setup>setup</setup>
-    <go>go</go>
+    <go>go
+if not any? people with [is-contagious?]
+[stop]</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="1500"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -5659,8 +5680,14 @@ NetLogo 6.1.1
     <metric>mean [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>standard-deviation [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>#bad-behaving-agents</metric>
+    <metric>current-stage</metric>
+    <metric>#agents-breaking-soft-lockdown</metric>
     <metric>TRANSFORM-LIST! contamination-network-table ","</metric>
     <metric>TRANSFORM-LIST! location-violating-quarantining-list ","</metric>
+    <metric>TRANSFORM-LIST! needs-weight-table ","</metric>
+    <metric>TRANSFORM-LIST! value-weight-table  ","</metric>
+    <metric>TRANSFORM-LIST! value-mean-std-table  ","</metric>
+    <metric>TRANSFORM-LIST! needs-mean-std-table ","</metric>
     <enumeratedValueSet variable="static-seed?">
       <value value="false"/>
     </enumeratedValueSet>
@@ -5692,11 +5719,12 @@ NetLogo 6.1.1
       <value value="&quot;ClusterB&quot;"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-REB3-ClusC" repetitions="28" runMetricsEveryStep="true">
+  <experiment name="S7-REB3-ClusC" repetitions="150" runMetricsEveryStep="true">
     <setup>setup</setup>
-    <go>go</go>
+    <go>go
+if not any? people with [is-contagious?]
+[stop]</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="1500"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -5872,8 +5900,14 @@ NetLogo 6.1.1
     <metric>mean [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>standard-deviation [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>#bad-behaving-agents</metric>
+    <metric>current-stage</metric>
+    <metric>#agents-breaking-soft-lockdown</metric>
     <metric>TRANSFORM-LIST! contamination-network-table ","</metric>
     <metric>TRANSFORM-LIST! location-violating-quarantining-list ","</metric>
+    <metric>TRANSFORM-LIST! needs-weight-table ","</metric>
+    <metric>TRANSFORM-LIST! value-weight-table  ","</metric>
+    <metric>TRANSFORM-LIST! value-mean-std-table  ","</metric>
+    <metric>TRANSFORM-LIST! needs-mean-std-table ","</metric>
     <enumeratedValueSet variable="static-seed?">
       <value value="false"/>
     </enumeratedValueSet>
@@ -5905,11 +5939,12 @@ NetLogo 6.1.1
       <value value="&quot;ClusterC&quot;"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-REB3-ClusD" repetitions="28" runMetricsEveryStep="true">
+  <experiment name="S7-REB3-ClusD" repetitions="150" runMetricsEveryStep="true">
     <setup>setup</setup>
-    <go>go</go>
+    <go>go
+if not any? people with [is-contagious?]
+[stop]</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="1500"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -6085,8 +6120,14 @@ NetLogo 6.1.1
     <metric>mean [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>standard-deviation [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>#bad-behaving-agents</metric>
+    <metric>current-stage</metric>
+    <metric>#agents-breaking-soft-lockdown</metric>
     <metric>TRANSFORM-LIST! contamination-network-table ","</metric>
     <metric>TRANSFORM-LIST! location-violating-quarantining-list ","</metric>
+    <metric>TRANSFORM-LIST! needs-weight-table ","</metric>
+    <metric>TRANSFORM-LIST! value-weight-table  ","</metric>
+    <metric>TRANSFORM-LIST! value-mean-std-table  ","</metric>
+    <metric>TRANSFORM-LIST! needs-mean-std-table ","</metric>
     <enumeratedValueSet variable="static-seed?">
       <value value="false"/>
     </enumeratedValueSet>
@@ -6118,11 +6159,12 @@ NetLogo 6.1.1
       <value value="&quot;ClusterD&quot;"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-REB3-ClusE" repetitions="28" runMetricsEveryStep="true">
+  <experiment name="S7-REB3-ClusE" repetitions="150" runMetricsEveryStep="true">
     <setup>setup</setup>
-    <go>go</go>
+    <go>go
+if not any? people with [is-contagious?]
+[stop]</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="1500"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -6298,8 +6340,14 @@ NetLogo 6.1.1
     <metric>mean [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>standard-deviation [change-of-quality-of-life-indicator-compared-to-setup] of people</metric>
     <metric>#bad-behaving-agents</metric>
+    <metric>current-stage</metric>
+    <metric>#agents-breaking-soft-lockdown</metric>
     <metric>TRANSFORM-LIST! contamination-network-table ","</metric>
     <metric>TRANSFORM-LIST! location-violating-quarantining-list ","</metric>
+    <metric>TRANSFORM-LIST! needs-weight-table ","</metric>
+    <metric>TRANSFORM-LIST! value-weight-table  ","</metric>
+    <metric>TRANSFORM-LIST! value-mean-std-table  ","</metric>
+    <metric>TRANSFORM-LIST! needs-mean-std-table ","</metric>
     <enumeratedValueSet variable="static-seed?">
       <value value="false"/>
     </enumeratedValueSet>
