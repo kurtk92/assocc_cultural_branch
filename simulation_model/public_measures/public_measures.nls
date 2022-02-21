@@ -85,6 +85,7 @@ to-report is-soft-lockdown-active?
         set is-working-from-home-recommended? true
         set was-social-distancing-enforced? true
         set current-stage 3
+        set ratio-self-quarantining-when-symptomatic 1
         set is-infected-and-their-families-requested-to-stay-at-home? true
         set keep-retired-quarantined-forever-if-global-quarantine-is-fired-global-measure? true
         set is-soft-lockdown-measure-activated? true

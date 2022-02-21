@@ -28,7 +28,7 @@ to load-scenario-7-cultural-model
     set Aware-of-corona-virus-at-start-of-simulation? false
     ;disable the filtering effect that the ratio-self-quarantining globals have on the quarantining behavior of agents
     ;do this by setting them to 1
-    set ratio-self-quarantining-when-symptomatic 1
+    set ratio-self-quarantining-when-symptomatic 0
     set ratio-self-quarantining-when-a-family-member-is-symptomatic 1
     
     if cultural-model-experimentation = "no-policy-measures" [

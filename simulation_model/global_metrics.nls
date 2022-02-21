@@ -372,7 +372,7 @@ to add-to-contagion-tree [infector infectee context]
     sl-aut
     asr
     current-stage ) [ x -> set contamination-network-table lput x contamination-network-table]
-  print contamination-network-table
+
 end
 
 
