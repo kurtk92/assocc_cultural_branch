@@ -2415,7 +2415,7 @@ uncertainty-avoidance
 uncertainty-avoidance
 0
 100
-73.87
+83.57
 1
 1
 NIL
@@ -2430,7 +2430,7 @@ individualism-vs-collectivism
 individualism-vs-collectivism
 0
 100
-58.73
+34.7
 1
 1
 NIL
@@ -2445,7 +2445,7 @@ power-distance
 power-distance
 0
 100
-46.93
+67.39
 1
 1
 NIL
@@ -2460,7 +2460,7 @@ indulgence-vs-restraint
 indulgence-vs-restraint
 0
 100
-39.0
+39.48
 1
 1
 NIL
@@ -2475,7 +2475,7 @@ masculinity-vs-femininity
 masculinity-vs-femininity
 0
 100
-54.27
+43.17
 1
 1
 NIL
@@ -2490,7 +2490,7 @@ long-vs-short-termism
 long-vs-short-termism
 0
 100
-75.27
+40.17
 1
 1
 NIL
@@ -4661,7 +4661,7 @@ CHOOSER
 load-country-hofstede-scores
 load-country-hofstede-scores
 "Belgium" "Canada" "Germany" "Great Britain" "France" "Italy" "Korea South" "Netherlands" "Norway" "Spain" "Singapore" "Sweden" "U.S.A." "World" "NoCluster" "ClusterA" "ClusterB" "ClusterC" "ClusterD" "ClusterE"
-19
+17
 
 SWITCH
 3583
@@ -5097,9 +5097,10 @@ NetLogo 6.1.1
 <experiments>
   <experiment name="S7-REB6-ClusNo" repetitions="28" runMetricsEveryStep="true">
     <setup>setup</setup>
-    <go>go</go>
+    <go>go
+if not any? people with [is-contagious?]
+[stop]</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="2000"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -5314,11 +5315,12 @@ NetLogo 6.1.1
       <value value="&quot;NoCluster&quot;"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-REB4-ClusA" repetitions="28" runMetricsEveryStep="true">
+  <experiment name="S7-REB6-ClusA" repetitions="28" runMetricsEveryStep="true">
     <setup>setup</setup>
-    <go>go</go>
+    <go>go
+if not any? people with [is-contagious?]
+[stop]</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="2000"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -5533,11 +5535,12 @@ NetLogo 6.1.1
       <value value="&quot;ClusterA&quot;"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-REB3-ClusB" repetitions="28" runMetricsEveryStep="true">
+  <experiment name="S7-REB6-ClusB" repetitions="28" runMetricsEveryStep="true">
     <setup>setup</setup>
-    <go>go</go>
+    <go>go
+if not any? people with [is-contagious?]
+[stop]</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="2000"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -5752,11 +5755,12 @@ NetLogo 6.1.1
       <value value="&quot;ClusterB&quot;"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-REB3-ClusC" repetitions="28" runMetricsEveryStep="false">
+  <experiment name="S7-REB6-ClusC" repetitions="28" runMetricsEveryStep="false">
     <setup>setup</setup>
-    <go>go</go>
+    <go>go
+if not any? people with [is-contagious?]
+[stop]</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="2000"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -5971,11 +5975,12 @@ NetLogo 6.1.1
       <value value="&quot;ClusterC&quot;"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-REB3-ClusD" repetitions="28" runMetricsEveryStep="true">
+  <experiment name="S7-REB6-ClusD" repetitions="28" runMetricsEveryStep="true">
     <setup>setup</setup>
-    <go>go</go>
+    <go>go
+if not any? people with [is-contagious?]
+[stop]</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="2000"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
@@ -6190,11 +6195,12 @@ NetLogo 6.1.1
       <value value="&quot;ClusterD&quot;"/>
     </enumeratedValueSet>
   </experiment>
-  <experiment name="S7-REB3-ClusE" repetitions="28" runMetricsEveryStep="true">
+  <experiment name="S7-REB6-ClusE" repetitions="28" runMetricsEveryStep="true">
     <setup>setup</setup>
-    <go>go</go>
+    <go>go
+if not any? people with [is-contagious?]
+[stop]</go>
     <final>output-print (word "Execution of run " behaviorspace-run-number " finished in " timer " seconds")</final>
-    <timeLimit steps="2000"/>
     <metric>cultural-tightness</metric>
     <metric>uncertainty-avoidance</metric>
     <metric>power-distance</metric>
